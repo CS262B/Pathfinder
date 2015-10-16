@@ -11,9 +11,6 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 
-    private String mActivityName;
-    private TextView mStatusView;
-    private TextView mStatusAllView;
 
 
     @Override
@@ -26,6 +23,15 @@ public class MainActivity extends Activity {
             @Override
         public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), MapsActivity.class);
+                startActivityForResult(intent, 0);
+            }
+        });
+
+        Button btnDest= (Button) findViewById(R.id.dest_button);
+        btnDest.setOnClickListener(new View.OnClickListener() {
+            @Override
+        public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), DestActivity.class);
                 startActivityForResult(intent, 0);
             }
         });
