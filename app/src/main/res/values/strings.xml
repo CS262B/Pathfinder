@@ -1,7 +1,9 @@
 <!-- This file contains the definitions of our strings -->
 <resources>
-    <string name="app_name">Prototype 1</string>
+    <string name="app_name">Calvin Pathfinder</string>
     <string name="hello_world">Prototype for CS262</string>
     <string name="action_settings">Settings</string>
     <string name="action_search">SEARCH</string>
+    <string name="map_button">MAP</string>
+    <string name="destination_button">DESTINATION</string>
 </resources>
