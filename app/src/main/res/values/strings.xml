@@ -1,3 +1,4 @@
+<!-- This file contains the definitions of our strings -->
 <resources>
     <string name="app_name">Prototype for 10/16</string>
     <string name="hello_world">Prototype for CS262</string>
