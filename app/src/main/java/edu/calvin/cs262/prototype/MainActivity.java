@@ -1,16 +1,40 @@
 package edu.calvin.cs262.prototype;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Button;
 
 public class MainActivity extends Activity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button btnMap= (Button) findViewById(R.id.map_button);
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+        public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MapsActivity.class);
+                startActivityForResult(intent, 0);
+            }
+        });
+
+        Button btnDest= (Button) findViewById(R.id.dest_button);
+        btnDest.setOnClickListener(new View.OnClickListener() {
+            @Override
+        public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), DestActivity.class);
+                startActivityForResult(intent, 0);
+            }
+        });
     }
 
     @Override
@@ -34,4 +58,6 @@ public class MainActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
