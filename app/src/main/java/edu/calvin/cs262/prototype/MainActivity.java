@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Button;
 
 public class MainActivity extends Activity {
 
@@ -19,6 +20,15 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button btnMap= (Button) findViewById(R.id.map_button);
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+        public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MapsActivity.class);
+                startActivityForResult(intent, 0);
+            }
+        });
     }
 
     @Override
@@ -43,55 +53,5 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mStatusTracker.setStatus(mActivityName, getString(R.string.on_start));
-        Utils.printStatus(mStatusView, mStatusAllView);
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        mStatusTracker.setStatus(mActivityName, getString(R.string.on_restart));
-        Utils.printStatus(mStatusView, mStatusAllView);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mStatusTracker.setStatus(mActivityName, getString(R.string.on_resume));
-        Utils.printStatus(mStatusView, mStatusAllView);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mStatusTracker.setStatus(mActivityName, getString(R.string.on_pause));
-        Utils.printStatus(mStatusView, mStatusAllView);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mStatusTracker.setStatus(mActivityName, getString(R.string.on_stop));
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mStatusTracker.setStatus(mActivityName, getString(R.string.on_destroy));
-        mStatusTracker.clear();
-    }
-
-    public void openMap(View v) {
-        Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-        startActivity(intent);
-    }
-
-    public void openDest(View v) {
-        Intent intent = new Intent(MainActivity.this, DestActivity.class);
-        startActivity(intent);
-    }
 
 }
