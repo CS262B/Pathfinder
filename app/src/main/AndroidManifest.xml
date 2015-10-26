@@ -3,6 +3,8 @@
     package="edu.calvin.cs262.prototype" >
     <uses-sdk android:minSdkVersion="11"/>
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
     <!-- This is the main xml file that is called when the app starts. It contains
     our app image along with the name and call to .MainActivity
     -->
