@@ -18,6 +18,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import android.app.Activity;
 import android.content.Intent;
+import android.view.View;
+import android.widget.Button;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -45,6 +47,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 5);
             mMap.animateCamera(yourLocation);
         }
+
+        Button btnChooseDest= (Button) findViewById(R.id.chooseDestBttn);
+        btnChooseDest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), DestActivity.class);
+                startActivityForResult(intent, 0);
+            }
+        });
     }
 
     @Override
