@@ -1,8 +1,8 @@
 <resources>
-
+    <color name="maroon_color">#ab181a</color>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+
     </style>
 
 </resources>
