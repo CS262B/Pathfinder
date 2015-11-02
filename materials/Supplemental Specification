@@ -1,10 +1,7 @@
    Pathfinder Supplemental Specification
-1) No log-in will be required, as Pathfinder is open to all visitors, students and likewise at Calvin College
-2) The app will store previous locations the user has looked up, allowing for easier access each time
-3) Pathfinder will be secure
-4) Pathfinder will be built for speed, as the size of the app will be kept to a minimal
-5) Features will be implemented to allow for the displays different sized devices
-6) Documentation will be provided for those who need it
-7) Recent Android versions will be supported
-8) Minimalistic design will allow for operability and learnability
-9) Pathfinder is free and ad-free
+1) Pathfinder will store previous locations the user has looked up, allowing for easier access each time
+2) Pathfinder will not store any personal information regarding the user except for previous search history.
+3) Pathfinder will not require users to log in.
+4) The app will display properly on screens with sizes 320dp x 426dp, 320dp x 470dp, 480dp x 640dp, and 720x960dp.
+5) Android 5.2 will be supported
+6) Pathfinder is free and ad-free
