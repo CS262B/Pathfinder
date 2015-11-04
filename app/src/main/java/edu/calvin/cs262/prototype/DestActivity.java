@@ -33,7 +33,8 @@ public class DestActivity extends Activity{
                 startActivityForResult(intent, 0);
             }
         });
-
+        
+        // Initialize go button
         Button btnGo= (Button) findViewById(R.id.goButton);
         // Add listener to "Go" button with intent to switch to the map activity
         btnGo.setOnClickListener(new View.OnClickListener() {
