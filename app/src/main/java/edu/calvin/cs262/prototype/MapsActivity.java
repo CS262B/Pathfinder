@@ -68,9 +68,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLng(calvin));
     }
 
-    private boolean checkLocationPermission()
-    {
-
+    private boolean checkLocationPermission() {
         String permission = "android.permission.ACCESS_FINE_LOCATION";
         int res = getApplicationContext().checkCallingOrSelfPermission(permission);
         return (res == PackageManager.PERMISSION_GRANTED);
