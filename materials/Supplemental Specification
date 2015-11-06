@@ -1,0 +1,7 @@
+   Pathfinder Supplemental Specification
+1) Pathfinder will store previous locations the user has looked up, allowing for easier access each time
+2) Pathfinder will not store any personal information regarding the user except for previous search history.
+3) Pathfinder will not require users to log in.
+4) The app will display properly on screens with sizes 320dp x 426dp, 320dp x 470dp, 480dp x 640dp, and 720x960dp.
+5) Android 5.2 will be supported
+6) Pathfinder is free and ad-free
