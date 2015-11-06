@@ -15,6 +15,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import android.app.Activity;
@@ -43,11 +44,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Location location = locationManager.getLastKnownLocation(provider);
 
             if (location != null) {
-                double lat = location.getLatitude();
-                double lng = location.getLongitude();
-                LatLng coordinate = new LatLng(lat, lng);
-                CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, (float)15.0);
-                mMap.animateCamera(yourLocation);
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                        new LatLng(location.getLatitude(), location.getLongitude()), 13));
+
+                CameraPosition cameraPosition = new CameraPosition.Builder()
+                        .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
+                        .zoom(17)                   // Sets the zoom
+                        .bearing(0)                // Sets the orientation of the camera
+                        .tilt(40)                   // Sets the tilt of the camera
+                        .build();                   // Creates a CameraPosition from the builder
+                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
         }
         Button btnChooseDest = (Button) findViewById(R.id.chooseDestBttn);
@@ -64,8 +70,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         LatLng calvin = new LatLng(42, -85);
-        mMap.addMarker(new MarkerOptions().position(calvin).title("Calvin College"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(calvin));
     }
 
     private boolean checkLocationPermission() {
