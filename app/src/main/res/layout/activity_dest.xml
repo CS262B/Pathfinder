@@ -3,6 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- This is the menu button which will bring the use back to activity_main.xml-->
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
@@ -12,6 +13,7 @@
         android:layout_row="0"
         android:layout_column="1" />
 
+    <!-- This is the destination text to title where you enter in your destination-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,6 +24,7 @@
         android:layout_row="0"
         android:layout_column="2" />
 
+    <!-- This is the "Enter building" label for where to enter building name-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,6 +32,7 @@
         android:text="Enter Building..."
         android:id="@+id/textView" />
 
+    <!-- -->
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,6 +41,7 @@
         android:selectAllOnFocus="true"
         android:editable="true" />
 
+    <!-- "Enter room number" label to show where to enter the room number-->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,6 +49,7 @@
         android:text="Enter room number..."
         android:id="@+id/textView2" />
 
+    <!-- Area where room number is displayed-->
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,6 +59,7 @@
         android:id="@+id/gridLayout"
         android:orientation="horizontal">
 
+        <!-- -->
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,6 +71,7 @@
             android:layout_column="1"
             android:selectAllOnFocus="true" />
 
+        <!-- "GO" button that will bring you to the map and area you are wanting to go.-->
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
