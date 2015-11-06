@@ -1,7 +1,14 @@
 package edu.calvin.cs262.prototype;
 
 /**
- * Created by Trevor Edewaard on 10/14/2015.
+ * Map Activity
+ *
+ * Displays interactive map using Google Maps API.
+ * Initially centers on user location, and takes
+ * input from Destination Activity in order to
+ * highlight a given building based on its location.
+ * Also will display indoor floor plan for each academic
+ * building.
  */
 import android.content.pm.PackageManager;
 import android.location.Criteria;
@@ -56,6 +63,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
         }
+        //back to destination activity to choose destination
         Button btnChooseDest = (Button) findViewById(R.id.chooseDestBttn);
         btnChooseDest.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -69,7 +77,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        LatLng calvin = new LatLng(42, -85);
+        LatLng calvin = new LatLng(42.932426, -85.587151);
     }
 
     private boolean checkLocationPermission() {
