@@ -3,6 +3,7 @@ package edu.calvin.cs262.prototype;
 /**
  * Created by Trevor Edewaard on 10/14/2015.
  */
+import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -38,23 +39,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         String provider = locationManager.getBestProvider(criteria, true);
-        Location location = locationManager.getLastKnownLocation(provider);
+        if (checkLocationPermission()) {
+            Location location = locationManager.getLastKnownLocation(provider);
 
-        if(location!=null) {
-            double lat = location.getLatitude();
-            double lng = location.getLongitude();
-            LatLng coordinate = new LatLng(lat, lng);
-            CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 5);
-            mMap.animateCamera(yourLocation);
-        }
-
-        Button btnChooseDest= (Button) findViewById(R.id.chooseDestBttn);
-        btnChooseDest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), DestActivity.class);
-                startActivityForResult(intent, 0);
+            if (location != null) {
+                double lat = location.getLatitude();
+                double lng = location.getLongitude();
+                LatLng coordinate = new LatLng(lat, lng);
+                CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, (float)15.0);
+                mMap.animateCamera(yourLocation);
             }
+        }
+        Button btnChooseDest = (Button) findViewById(R.id.chooseDestBttn);
+        btnChooseDest.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), DestActivity.class);
+                    startActivityForResult(intent, 0);
+                }
         });
     }
 
@@ -64,5 +66,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng calvin = new LatLng(42, -85);
         mMap.addMarker(new MarkerOptions().position(calvin).title("Calvin College"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(calvin));
+    }
+
+    private boolean checkLocationPermission()
+    {
+
+        String permission = "android.permission.ACCESS_FINE_LOCATION";
+        int res = getApplicationContext().checkCallingOrSelfPermission(permission);
+        return (res == PackageManager.PERMISSION_GRANTED);
     }
 }
