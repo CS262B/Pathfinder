@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- This is the menu button which will bring the use back to activity_main.xml-->
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Menu"
+        android:id="@+id/backmenubutton"
+        android:layout_row="0"
+        android:layout_column="1" />
+
+    <!-- This is the destination text to title where you enter in your destination-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Destination"
+        android:id="@+id/Destination"
+        android:layout_gravity="center_horizontal"
+        android:layout_row="0"
+        android:layout_column="2" />
+
+    <!-- This is the "Enter building" label for where to enter building name-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Enter Building..."
+        android:id="@+id/textView" />
+
+    <!-- -->
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buildingCodeField"
+        android:text="SB"
+        android:selectAllOnFocus="true"
+        android:editable="true" />
+
+    <!-- "Enter room number" label to show where to enter the room number-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Enter room number..."
+        android:id="@+id/textView2" />
+
+    <!-- Area where room number is displayed-->
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:rowCount="1"
+        android:columnCount="3"
+        android:id="@+id/gridLayout"
+        android:orientation="horizontal">
+
+        <!-- -->
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/roomNumField"
+            android:text="010"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:selectAllOnFocus="true" />
+
+        <!-- "GO" button that will bring you to the map and area you are wanting to go.-->
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go!"
+            android:id="@+id/goButton"
+            android:layout_gravity="right"
+            android:layout_row="0"
+            android:layout_column="2" />
+    </GridLayout>
+
+</LinearLayout>

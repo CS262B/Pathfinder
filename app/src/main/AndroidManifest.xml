@@ -7,14 +7,14 @@
 
     <!-- This is the main xml file that is called when the app starts. It contains
     our app image along with the name and call to .MainActivity
-    Below is our icon styling, theme, app name, and unique Play Services API Key
+    Below is our icon styling, theme, app name, and unique Play Services API Key.
     -->
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
