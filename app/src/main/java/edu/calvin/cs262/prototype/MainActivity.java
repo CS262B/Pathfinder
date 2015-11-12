@@ -1,5 +1,12 @@
 package edu.calvin.cs262.prototype;
 
+/**
+ * Main Menu Activity
+ *
+ * Contains buttons for accessing both the
+ * Map and Destination Activities
+ */
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,12 +19,12 @@ import android.widget.Button;
 public class MainActivity extends Activity {
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //button controller for Map Activity
         Button btnMap= (Button) findViewById(R.id.map_button);
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,6 +34,7 @@ public class MainActivity extends Activity {
             }
         });
 
+        //button controller for Destination Activity
         Button btnDest= (Button) findViewById(R.id.dest_button);
         btnDest.setOnClickListener(new View.OnClickListener() {
             @Override
