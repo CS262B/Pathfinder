@@ -63,6 +63,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
         }
+        //if (getCallingActivity().equals("DestActivity")) {
+            MarkerOptions mOps = new MarkerOptions();
+            mMap.addMarker(mOps.position(new LatLng(42.931003, -85.588937)));
+        //}
         //back to destination activity to choose destination
         Button btnChooseDest = (Button) findViewById(R.id.chooseDestBttn);
         btnChooseDest.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +84,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng calvin = new LatLng(42.932426, -85.587151);
     }
 
+    /* checkLocationPermission determines if the app has been granted permission to access
+     * the device's location using GPS
+     *
+     * Return: true if permission is granted, false otherwise
+     */
     private boolean checkLocationPermission() {
         String permission = "android.permission.ACCESS_FINE_LOCATION";
         int res = getApplicationContext().checkCallingOrSelfPermission(permission);
