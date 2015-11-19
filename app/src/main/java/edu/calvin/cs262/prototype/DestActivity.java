@@ -23,8 +23,9 @@ public class DestActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dest);
 
-        //back to the main menu
+        // Initialize back button
         Button btnMenu= (Button) findViewById(R.id.backmenubutton);
+        // Add listener to "Back" button with intent to switch to the main menu
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -32,8 +33,8 @@ public class DestActivity extends Activity{
                 startActivityForResult(intent, 0);
             }
         });
-
-        //to map activity with eventual display for entered building and room number
+        
+        // Initialize go button
         Button btnGo= (Button) findViewById(R.id.goButton);
         btnGo.setOnClickListener(new View.OnClickListener() {
             @Override
