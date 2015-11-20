@@ -1,20 +1,6 @@
 package edu.calvin.cs262.prototype;
 
-/**
-<<<<<<< HEAD
- * MapsActivity creates an Android activity to display Google Maps in order to view your
- * location at Calvin.
-=======
- * Map Activity
- *
- * Displays interactive map using Google Maps API.
- * Initially centers on user location, and takes
- * input from Destination Activity in order to
- * highlight a given building based on its location.
- * Also will display indoor floor plan for each academic
- * building.
->>>>>>> 233a4f15a0c573d4befe17ce87f7abb65051cac3
- */
+
 
 import android.content.pm.PackageManager;
 import android.location.Criteria;
@@ -36,7 +22,17 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 
-
+/**
+ * MapsActivity models an Android activity to display Google Maps in order to view your
+ * location at Calvin.
+ *
+ * Displays interactive map using Google Maps API.
+ * Initially centers on user location, and takes
+ * input from Destination Activity in order to
+ * highlight a given building based on its location.
+ * Also will display indoor floor plan for each academic
+ * building.
+ */
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private static GoogleMap mMap;

@@ -1,14 +1,6 @@
 package edu.calvin.cs262.prototype;
 
-/**
- * Destination Activity
- *
- * Allows user to enter building and (optional) room number
- * in the text fields then brings user to Map Activity
- * upon pressing Go! button. Text field input is used to
- * retrieve building coordinates from database, which are
- * used in Map Activity.
- */
+
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -30,7 +22,15 @@ import java.lang.String;
 import java.io.InputStream;
 import java.io.IOException;
 
-
+/**
+ * Destination Activity
+ *
+ * Allows user to enter building and (optional) room number
+ * in the text fields then brings user to Map Activity
+ * upon pressing Go! button. Text field input is used to
+ * retrieve building coordinates from database, which are
+ * used in Map Activity.
+ */
 public class DestActivity extends Activity{
     //hardcoded location for now to test
     public static double bLat = 42.931003;
@@ -67,7 +67,7 @@ public class DestActivity extends Activity{
     }
 
 
-//not sure if this is necessary
+//  Not sure if this is necessary
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //some intent action for map acvitity goes here...

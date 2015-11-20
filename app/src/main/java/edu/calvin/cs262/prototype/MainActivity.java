@@ -1,11 +1,6 @@
 package edu.calvin.cs262.prototype;
 
-/**
- * Main Menu Activity
- *
- * Contains buttons for accessing both the
- * Map and Destination Activities
- */
+
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,6 +11,12 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Button;
 
+/**
+ * Main Menu Activity
+ *
+ * Contains buttons for accessing both the
+ * Map and Destination Activities
+ */
 public class MainActivity extends Activity {
 
 
