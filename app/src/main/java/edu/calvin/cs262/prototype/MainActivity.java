@@ -21,7 +21,7 @@ public class MainActivity extends Activity {
         Button btnMap= (Button) findViewById(R.id.map_button);
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
-        public void onClick(View v) {
+            public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), MapsActivity.class);
                 startActivityForResult(intent, 0);
             }
@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
         Button btnDest= (Button) findViewById(R.id.dest_button);
         btnDest.setOnClickListener(new View.OnClickListener() {
             @Override
-        public void onClick(View v) {
+            public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), DestActivity.class);
                 startActivityForResult(intent, 0);
             }

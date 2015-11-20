@@ -1,7 +1,8 @@
 package edu.calvin.cs262.prototype;
 
 /**
- * Created by Trevor Edewaard on 10/14/2015.
+ * MapsActivity creates an Android activity to display Google Maps in order to view your
+ * location at Calvin.
  */
 import android.location.Criteria;
 import android.location.Location;
