@@ -17,10 +17,26 @@ import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
 
+import java.lang.String;
+
+//import org.apache.http.HttpEntity;
+//import org.apache.http.HttpResponse;
+//import org.apache.http.client.HttpClient;
+//import org.apache.http.client.methods.HttpGet;
+//import org.apache.http.impl.client.DefaultHttpClient;
+//import org.apache.http.protocol.BasicHttpContext;
+//import org.apache.http.protocol.HttpContext;
+
+import java.io.InputStream;
 import java.io.IOException;
 
 
 public class DestActivity extends Activity{
+    //hardcoded location for now to test
+    public static double bLat = 42.931003;
+    public static double bLong = -85.588937;
+    public static String bName = "Science Building";
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -44,10 +60,21 @@ public class DestActivity extends Activity{
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), MapsActivity.class);
                 startActivityForResult(intent, 0);
+                MapsActivity.findBuilding(bLat, bLong, bName);
             }
         });
 
     }
+
+
+//not sure if this is necessary
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //some intent action for map acvitity goes here...
+        if (resultCode == MapsActivity.RESULT_OK){
+
+        }
+        }
 
 //    Setting up my call to the web service
 //    private static String ADD STUFF HERE
