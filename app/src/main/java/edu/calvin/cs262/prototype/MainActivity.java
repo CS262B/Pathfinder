@@ -2,7 +2,7 @@ package edu.calvin.cs262.prototype;
 
 /**
  * Main Menu Activity
- *
+ * <p/>
  * Contains buttons for accessing both the
  * Map and Destination Activities
  */
@@ -25,20 +25,20 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         //button controller for Map Activity
-        Button btnMap= (Button) findViewById(R.id.map_button);
+        Button btnMap = (Button) findViewById(R.id.map_button);
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
-        public void onClick(View v) {
+            public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), MapsActivity.class);
                 startActivityForResult(intent, 0);
             }
         });
 
         //button controller for Destination Activity
-        Button btnDest= (Button) findViewById(R.id.dest_button);
+        Button btnDest = (Button) findViewById(R.id.dest_button);
         btnDest.setOnClickListener(new View.OnClickListener() {
             @Override
-        public void onClick(View v) {
+            public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), DestActivity.class);
                 startActivityForResult(intent, 0);
             }
