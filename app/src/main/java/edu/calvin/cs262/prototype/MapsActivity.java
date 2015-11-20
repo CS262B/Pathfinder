@@ -10,6 +10,7 @@ package edu.calvin.cs262.prototype;
  * Also will display indoor floor plan for each academic
  * building.
  */
+
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -33,7 +34,7 @@ import android.widget.Button;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
+    private static GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +65,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
         //if (getCallingActivity().equals("DestActivity")) {
-            MarkerOptions mOps = new MarkerOptions();
-            mMap.addMarker(mOps.position(new LatLng(42.931003, -85.588937)));
+            //MarkerOptions mOps = new MarkerOptions();
+            //mMap.addMarker(mOps.position(new LatLng(42.931003, -85.588937)));
         //}
         //back to destination activity to choose destination
         Button btnChooseDest = (Button) findViewById(R.id.chooseDestBttn);
@@ -76,6 +77,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     startActivityForResult(intent, 0);
                 }
         });
+    }
+
+    /**
+     * findBuilding takes input for latitude and longitude, ultimately coming from
+     * Dest activity, places a marker on the specified building based on lat and long,
+     * and also focuses camera on said building.
+     *
+     * @param newLat is the physical latitude of the building
+     * @param newLong is the physical longitude of the building
+     * @param locName is the name of the building
+     */
+    public static void findBuilding (double newLat, double newLong, String locName) {
+        LatLng building = new LatLng(newLat, newLong);
+        mMap.addMarker(new MarkerOptions().position(building).title(locName));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(building));
     }
 
     @Override
