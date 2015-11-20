@@ -11,10 +11,13 @@ package edu.calvin.cs262.prototype;
  */
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
+
+import java.io.IOException;
 
 
 public class DestActivity extends Activity{
@@ -45,4 +48,31 @@ public class DestActivity extends Activity{
         });
 
     }
+
+//    Setting up my call to the web service
+//    private static String ADD STUFF HERE
+
+//    private class LongRunningGetIO extends AsyncTask<Void, Void, String> {
+//
+//        /**
+//         * This method extracts text from the HTTP response entity.
+//         *
+//         * @param entity
+//         * @return
+//         * @throws IllegalStateException
+//         * @throws IOException
+//         */
+//          protected String getASCIIContentFromEntity(entity) throws IllegalStateException, IOException {
+//              InputStream in = entity.getContent();
+//                StringBuffer out = new StringBuffer();
+//                int n = 1;
+//                while (n > 0) {
+//                    byte[] b = new byte[4096];
+//                    n = in.read(b);
+//                    if (n > 0) out.append(new String(b, 0, n));
+//                }
+//    return out.toString();
+//      }
+//    }
+
 }
