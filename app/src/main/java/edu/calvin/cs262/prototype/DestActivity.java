@@ -1,7 +1,6 @@
 package edu.calvin.cs262.prototype;
 
 
-
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -24,26 +23,26 @@ import java.io.IOException;
 
 /**
  * Destination Activity
- *
+ * <p/>
  * Allows user to enter building and (optional) room number
  * in the text fields then brings user to Map Activity
  * upon pressing Go! button. Text field input is used to
  * retrieve building coordinates from database, which are
  * used in Map Activity.
  */
-public class DestActivity extends Activity{
+public class DestActivity extends Activity {
     //hardcoded location for now to test
-    public static double bLat = 42.931003;
-    public static double bLong = -85.588937;
-    public static String bName = "Science Building";
+    private static double bLat = 42.931003;
+    private static double bLong = -85.588937;
+    private static String bName = "Science Building";
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dest);
 
         // Initialize back button
-        Button btnMenu= (Button) findViewById(R.id.backmenubutton);
+        Button btnMenu = (Button) findViewById(R.id.backmenubutton);
         // Add listener to "Back" button with intent to switch to the main menu
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,9 +51,9 @@ public class DestActivity extends Activity{
                 startActivityForResult(intent, 0);
             }
         });
-        
+
         // Initialize go button
-        Button btnGo= (Button) findViewById(R.id.goButton);
+        Button btnGo = (Button) findViewById(R.id.goButton);
         btnGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,14 +66,14 @@ public class DestActivity extends Activity{
     }
 
 
-//  Not sure if this is necessary
+    //  Not sure if this is necessary
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //some intent action for map acvitity goes here...
-        if (resultCode == MapsActivity.RESULT_OK){
+        //some intent action for map activity goes here...
+        if (resultCode == MapsActivity.RESULT_OK) {
 
         }
-        }
+    }
 
 //    Setting up my call to the web service
 //    private static String ADD STUFF HERE
