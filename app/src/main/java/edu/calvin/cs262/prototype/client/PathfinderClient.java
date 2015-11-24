@@ -1,4 +1,4 @@
-package edu.calvin.cs262.prototype;
+package edu.calvin.cs262.prototype.client;
 
 import edu.calvin.cs262.prototype.models.Building;
 
@@ -23,6 +23,8 @@ public class PathfinderClient {
 
     public Building getBuildingByName(String name){
         // Placeholder method stub returns the science building
-        return new Building("Science Building", 42.931003, -85.588937, "picture.gif");
+        return new Building(0, "Science Building", 42.931003, -85.588937, "picture.gif");
     }
+
+
 }
