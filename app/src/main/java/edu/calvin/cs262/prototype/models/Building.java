@@ -6,10 +6,12 @@ package edu.calvin.cs262.prototype.models;
  * Created by Derek Dik (drd26) on 11/23/2015.
  */
 public class Building {
+    private int myID;
     private String myName, myURL;
     private double myLat, myLong;
 
-    public Building(String name, double lattitude, double longitude, String URL){
+    public Building(int id, String name, double lattitude, double longitude, String URL){
+        myID = id;
         myName = name;
         myURL = URL;
         myLat = lattitude;
@@ -17,6 +19,9 @@ public class Building {
     }
 
     //Accessors
+    public int getID(){
+        return myID;
+    }
     public String getName(){
         return myName;
     }
