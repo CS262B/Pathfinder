@@ -63,13 +63,18 @@ public class DestActivity extends Activity{
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), MapsActivity.class);
                 startActivityForResult(intent, 0);
-                // Get instance of client
-                PathfinderClient client = PathfinderClient.getInstance();
-                // Find the entered building
-                Building desiredBuilding = client.getBuilding(buildingCodeField.getText().toString());
-                // Add a marker to the map at the building's location
-                MapsActivity.findBuilding(desiredBuilding.getLattitude(), desiredBuilding.getLongitude(), desiredBuilding.getName());
 
+                try {
+                    // Get instance of client
+                    PathfinderClient client = PathfinderClient.getInstance();
+                    // Find the entered building
+                    Building desiredBuilding = client.getBuilding(buildingCodeField.getText().toString());
+                    // Add a marker to the map at the building's location
+                    MapsActivity.findBuilding(desiredBuilding.getLattitude(), desiredBuilding.getLongitude(), desiredBuilding.getName());
+                    System.out.println("Marker placed!");
+                } catch (NullPointerException n){
+                    System.out.println(n.getMessage());
+                }
             }
         });
 

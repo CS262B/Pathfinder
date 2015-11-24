@@ -1,5 +1,11 @@
 package edu.calvin.cs262.prototype.client;
 
+import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
 import edu.calvin.cs262.prototype.models.Building;
 import edu.calvin.cs262.prototype.models.Floor;
 import edu.calvin.cs262.prototype.models.Room;
@@ -12,8 +18,14 @@ import edu.calvin.cs262.prototype.models.Room;
  */
 public class PathfinderClient {
     private static PathfinderClient instance;
-    private PathfinderClient(){
+    private Map<String, Building> demoBuildings;
 
+
+    private PathfinderClient(){
+        demoBuildings = new HashMap<String, Building>();
+        demoBuildings.put("SB", new Building(0, "SB", 42.931003, -85.588937, "sb.gif"));
+        demoBuildings.put("NH", new Building(0, "NH", 42.931739, -85.588872, "nh.gif"));
+        demoBuildings.put("DH", new Building(0, "DH", 42.931010, -85.588801, "dh.gif"));
     }
 
     public static PathfinderClient getInstance(){
@@ -26,11 +38,16 @@ public class PathfinderClient {
     /**
      * getBuilding() method retrieves a given building from the server.
      * @param name
+     * @throws NullPointerException Throws Null Pointer exception if no object is found
      * @return Building model object
      */
-    public Building getBuilding(String name){
-        // Placeholder method stub returns the science building
-        return new Building(0, name, 42.931003, -85.588937, "picture.gif");
+    public Building getBuilding(String name) throws NullPointerException{
+        // Placeholder method looks up the building in a dictionary
+        Building building = demoBuildings.get(name);
+        if(building == null){
+            throw new NullPointerException("No buidling with given name");
+        }
+        return building;
     }
 
     /**
@@ -50,7 +67,7 @@ public class PathfinderClient {
      * @param floorNum
      * @return Floor model object
      */
-    public Floor getFloor(String buildingName, int floorNum){
+    public Floor getFloor(String buildingName, int floorNum) throws NullPointerException{
         Building thisBuilding = instance.getBuilding(buildingName);
         // TODO: Replace return statement of getFloorByBuilding with actual get method from server
         return new Floor(0, thisBuilding.getID(), floorNum, "floorplan.gif");
