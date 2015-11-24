@@ -62,8 +62,6 @@ public class DestActivity extends Activity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), MapsActivity.class);
-                startActivityForResult(intent, 0);
-
                 try {
                     // Get instance of client
                     PathfinderClient client = PathfinderClient.getInstance();
@@ -75,6 +73,7 @@ public class DestActivity extends Activity{
                 } catch (NullPointerException n){
                     System.out.println(n.getMessage());
                 }
+                startActivityForResult(intent, 0);
             }
         });
 
