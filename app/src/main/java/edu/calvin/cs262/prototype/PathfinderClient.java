@@ -1,5 +1,7 @@
 package edu.calvin.cs262.prototype;
 
+import edu.calvin.cs262.prototype.models.Building;
+
 /**
  * PathfinderClient is a singleton class which handles communication with the server.
  * It provides methods to get building and room model objects.
@@ -19,4 +21,8 @@ public class PathfinderClient {
         return instance;
     }
 
+    public Building getBuildingByName(String name){
+        // Placeholder method stub returns the science building
+        return new Building("Science Building", 42.931003, -85.588937, "picture.gif");
+    }
 }
