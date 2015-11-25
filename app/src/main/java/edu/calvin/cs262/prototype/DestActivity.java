@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
+import android.widget.EditText;
 
 import java.lang.String;
 
@@ -21,6 +22,9 @@ import java.lang.String;
 import java.io.InputStream;
 import java.io.IOException;
 
+import edu.calvin.cs262.prototype.client.PathfinderClient;
+import edu.calvin.cs262.prototype.models.Building;
+
 /**
  * Destination Activity
  * <p/>
@@ -30,16 +34,16 @@ import java.io.IOException;
  * retrieve building coordinates from database, which are
  * used in Map Activity.
  */
-public class DestActivity extends Activity {
-    //hardcoded location for now to test
-    private static double bLat = 42.931003;
-    private static double bLong = -85.588937;
-    private static String bName = "Science Building";
+public class DestActivity extends Activity{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dest);
+
+        // Initialize fields
+        final EditText buildingCodeField = (EditText) findViewById(R.id.buildingCodeField);
+        EditText roomNumField = (EditText) findViewById(R.id.roomNumField);
 
         // Initialize back button
         Button btnMenu = (Button) findViewById(R.id.backmenubutton);
@@ -58,8 +62,18 @@ public class DestActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), MapsActivity.class);
+                try {
+                    // Get instance of client
+                    PathfinderClient client = PathfinderClient.getInstance();
+                    // Find the entered building
+                    Building desiredBuilding = client.getBuilding(buildingCodeField.getText().toString());
+                    // Add a marker to the map at the building's location
+                    MapsActivity.findBuilding(desiredBuilding.getLattitude(), desiredBuilding.getLongitude(), desiredBuilding.getName());
+                    System.out.println("Marker placed!");
+                } catch (NullPointerException n){
+                    System.out.println(n.getMessage());
+                }
                 startActivityForResult(intent, 0);
-                MapsActivity.findBuilding(bLat, bLong, bName);
             }
         });
 

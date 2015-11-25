@@ -81,7 +81,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     /**
-     * findBuilding takes input for latitude and longitude, ultimately coming from
+     * findBuilding() takes input for latitude and longitude, ultimately coming from
      * Dest activity, places a marker on the specified building based on lat and long,
      * and also focuses camera on said building.
      *
