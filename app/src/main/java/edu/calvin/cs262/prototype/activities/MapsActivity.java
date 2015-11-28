@@ -1,4 +1,4 @@
-package edu.calvin.cs262.prototype;
+package edu.calvin.cs262.prototype.activities;
 
 
 
@@ -9,7 +9,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -17,10 +16,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import android.app.Activity;
+
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+
+import edu.calvin.cs262.prototype.R;
+import edu.calvin.cs262.prototype.activities.DestActivity;
 
 /**
  * MapsActivity models an Android activity to display Google Maps in order to view your
@@ -36,6 +38,7 @@ import android.widget.Button;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private static GoogleMap mMap;
+    private static LatLng currentMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
         }
+        if(currentMarker != null) {
+            mMap.addMarker(new MarkerOptions().position(currentMarker).title("Destination"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(currentMarker));
+        }
         //if (getCallingActivity().equals("DestActivity")) {
             //MarkerOptions mOps = new MarkerOptions();
             //mMap.addMarker(mOps.position(new LatLng(42.931003, -85.588937)));
@@ -90,9 +97,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * @param locName is the name of the building
      */
     public static void findBuilding (double newLat, double newLong, String locName) {
-        LatLng building = new LatLng(newLat, newLong);
-        mMap.addMarker(new MarkerOptions().position(building).title(locName));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(building));
+        currentMarker = new LatLng(newLat, newLong);
     }
 
     @Override

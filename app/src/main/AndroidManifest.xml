@@ -24,7 +24,7 @@
 
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,10 +32,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DestActivity">
+            android:name=".activities.DestActivity">
         </activity>
         <activity
-            android:name=".MapsActivity"
+            android:name=".activities.MapsActivity"
             android:launchMode="singleTask">
         </activity>
     </application>
