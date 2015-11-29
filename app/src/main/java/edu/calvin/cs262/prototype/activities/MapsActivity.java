@@ -24,6 +24,7 @@ import android.widget.Button;
 
 import edu.calvin.cs262.prototype.R;
 import edu.calvin.cs262.prototype.activities.DestActivity;
+import edu.calvin.cs262.prototype.models.Building;
 
 /**
  * MapsActivity models an Android activity to display Google Maps in order to view your
@@ -39,7 +40,7 @@ import edu.calvin.cs262.prototype.activities.DestActivity;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private static GoogleMap mMap;
-    private static LatLng currentMarker;
+    private static Building currentDestination;
     private Button btnBlueprint;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +70,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
         }
-        if(currentMarker != null) {
+        if(currentDestination != null) {
             mMap.setOnMarkerClickListener(this);
-            mMap.addMarker(new MarkerOptions().position(currentMarker).title("Destination"));
-
+            LatLng currentMarker = new LatLng(currentDestination.getLattitude(), currentDestination.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(currentMarker).title(currentDestination.getName()));
+            BlueprintActivity.currentImageURL = currentDestination.myURL();
             mMap.moveCamera(CameraUpdateFactory.newLatLng(currentMarker));
         }
         //if (getCallingActivity().equals("DestActivity")) {
@@ -103,16 +105,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     /**
-     * findBuilding() takes input for latitude and longitude, ultimately coming from
-     * Dest activity, places a marker on the specified building based on lat and long,
-     * and also focuses camera on said building.
+     * setCurrentBuilding() takes a building model and sets it as the current destination of the map
      *
-     * @param newLat is the physical latitude of the building
-     * @param newLong is the physical longitude of the building
-     * @param locName is the name of the building
+     * @param currentBuilding is the building model to represent the destination
      */
-    public static void findBuilding (double newLat, double newLong, String locName) {
-        currentMarker = new LatLng(newLat, newLong);
+    public static void setCurrentBuilding(Building currentBuilding) {
+        currentDestination = currentBuilding;
     }
 
     @Override

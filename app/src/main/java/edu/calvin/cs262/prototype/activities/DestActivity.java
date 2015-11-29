@@ -62,7 +62,7 @@ public class DestActivity extends Activity{
                     // Find the entered building
                     Building desiredBuilding = client.getBuilding(buildingCodeField.getText().toString());
                     // Add a marker to the map at the building's location
-                    MapsActivity.findBuilding(desiredBuilding.getLattitude(), desiredBuilding.getLongitude(), desiredBuilding.getName());
+                    MapsActivity.setCurrentBuilding(desiredBuilding);
                 } catch (NullPointerException n){
                     System.out.println(n.getMessage());
                 }
