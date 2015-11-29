@@ -66,6 +66,7 @@ public class DestActivity extends Activity{
                 } catch (NullPointerException n){
                     System.out.println(n.getMessage());
                 }
+
                 // Create an intent to start MapActivity
                 Intent intent = new Intent(v.getContext(), MapsActivity.class);
                 // Start activity
