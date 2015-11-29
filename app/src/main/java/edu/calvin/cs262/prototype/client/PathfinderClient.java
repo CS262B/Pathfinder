@@ -24,8 +24,9 @@ public class PathfinderClient {
     private PathfinderClient(){
         demoBuildings = new HashMap<String, Building>();
         demoBuildings.put("SB", new Building(0, "SB", 42.931003, -85.588937, "sb.gif"));
-        demoBuildings.put("NH", new Building(0, "NH", 42.931739, -85.588872, "nh.gif"));
-        demoBuildings.put("DH", new Building(0, "DH", 42.931010, -85.588801, "dh.gif"));
+        demoBuildings.put("NH", new Building(1, "NH", 42.931739, -85.588872, "nh.gif"));
+        demoBuildings.put("DH", new Building(2, "DH", 42.931010, -85.588801, "dh.gif"));
+        demoBuildings.put("SC", new Building(2, "SC", 42.930323, -85.589324, "sc.gif"));
     }
 
     public static PathfinderClient getInstance(){
