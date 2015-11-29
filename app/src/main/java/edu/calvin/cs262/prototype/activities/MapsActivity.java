@@ -7,7 +7,6 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -15,9 +14,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
 
@@ -35,11 +36,11 @@ import edu.calvin.cs262.prototype.activities.DestActivity;
  * Also will display indoor floor plan for each academic
  * building.
  */
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private static GoogleMap mMap;
     private static LatLng currentMarker;
-
+    private Button btnBlueprint;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,21 +70,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
         if(currentMarker != null) {
+            mMap.setOnMarkerClickListener(this);
             mMap.addMarker(new MarkerOptions().position(currentMarker).title("Destination"));
+
             mMap.moveCamera(CameraUpdateFactory.newLatLng(currentMarker));
         }
         //if (getCallingActivity().equals("DestActivity")) {
             //MarkerOptions mOps = new MarkerOptions();
             //mMap.addMarker(mOps.position(new LatLng(42.931003, -85.588937)));
         //}
+
+        // Blueprint view button
+        btnBlueprint = (Button) findViewById(R.id.blueprintBttn);
+        btnBlueprint.setVisibility(View.INVISIBLE);
+        btnBlueprint.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), BlueprintActivity.class);
+                startActivityForResult(intent, 0);
+            }
+        });
+
         //back to destination activity to choose destination
         Button btnChooseDest = (Button) findViewById(R.id.chooseDestBttn);
         btnChooseDest.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), DestActivity.class);
-                    startActivityForResult(intent, 0);
-                }
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), DestActivity.class);
+                startActivityForResult(intent, 0);
+            }
         });
     }
 
@@ -115,5 +130,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String permission = "android.permission.ACCESS_FINE_LOCATION";
         int res = getApplicationContext().checkCallingOrSelfPermission(permission);
         return (res == PackageManager.PERMISSION_GRANTED);
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        btnBlueprint.setVisibility(View.VISIBLE);
+        return false;
     }
 }
