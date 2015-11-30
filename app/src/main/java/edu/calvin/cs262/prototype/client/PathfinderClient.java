@@ -19,13 +19,21 @@ import edu.calvin.cs262.prototype.models.Room;
 public class PathfinderClient {
     private static PathfinderClient instance;
     private Map<String, Building> demoBuildings;
+    private Map<String, Floor[]> demoFloors;
 
 
     private PathfinderClient(){
         demoBuildings = new HashMap<String, Building>();
-        demoBuildings.put("SB", new Building(0, "SB", 42.931003, -85.588937, "sb.gif"));
-        demoBuildings.put("NH", new Building(0, "NH", 42.931739, -85.588872, "nh.gif"));
-        demoBuildings.put("DH", new Building(0, "DH", 42.931010, -85.588801, "dh.gif"));
+        demoFloors = new HashMap<String, Floor[]>();
+        demoBuildings.put("SB", new Building(0, "SB", 42.931003, -85.588937, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-1.gif"));
+        demoFloors.put("SB", new Floor[]{new Floor(0, 0, 0, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-0.gif"),
+                new Floor(0, 0, 1, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-1.gif"),
+                new Floor(0, 0, 2, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-2.gif"),
+                new Floor(0, 0, 3, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-3.gif")
+        });
+        demoBuildings.put("NH", new Building(1, "NH", 42.931739, -85.588872, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-1.gif"));
+        demoBuildings.put("DH", new Building(2, "DH", 42.931010, -85.588801, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-1.gif"));
+        demoBuildings.put("SC", new Building(2, "SC", 42.930323, -85.589324, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-1.gif"));
     }
 
     public static PathfinderClient getInstance(){
@@ -68,9 +76,8 @@ public class PathfinderClient {
      * @return Floor model object
      */
     public Floor getFloor(String buildingName, int floorNum) throws NullPointerException{
-        Building thisBuilding = instance.getBuilding(buildingName);
         // TODO: Replace return statement of getFloorByBuilding with actual get method from server
-        return new Floor(0, thisBuilding.getID(), floorNum, "floorplan.gif");
+        return demoFloors.get(buildingName)[floorNum];
     }
 
     /**

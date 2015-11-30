@@ -1,4 +1,4 @@
-package edu.calvin.cs262.prototype;
+package edu.calvin.cs262.prototype.activities;
 
 
 
@@ -7,20 +7,24 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import android.app.Activity;
+
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
+
+import edu.calvin.cs262.prototype.R;
+import edu.calvin.cs262.prototype.activities.DestActivity;
+import edu.calvin.cs262.prototype.models.Building;
 
 /**
  * MapsActivity models an Android activity to display Google Maps in order to view your
@@ -33,10 +37,11 @@ import android.widget.Button;
  * Also will display indoor floor plan for each academic
  * building.
  */
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private static GoogleMap mMap;
-
+    private static Building currentDestination;
+    private Button btnBlueprint;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,34 +70,47 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
         }
+        if(currentDestination != null) {
+            mMap.setOnMarkerClickListener(this);
+            LatLng currentMarker = new LatLng(currentDestination.getLattitude(), currentDestination.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(currentMarker).title(currentDestination.getName()));
+            BlueprintActivity.currentImageURL = currentDestination.myURL();
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(currentMarker));
+        }
         //if (getCallingActivity().equals("DestActivity")) {
             //MarkerOptions mOps = new MarkerOptions();
             //mMap.addMarker(mOps.position(new LatLng(42.931003, -85.588937)));
         //}
+
+        // Blueprint view button
+        btnBlueprint = (Button) findViewById(R.id.blueprintBttn);
+        btnBlueprint.setVisibility(View.INVISIBLE);
+        btnBlueprint.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), BlueprintActivity.class);
+                startActivityForResult(intent, 0);
+            }
+        });
+
         //back to destination activity to choose destination
         Button btnChooseDest = (Button) findViewById(R.id.chooseDestBttn);
         btnChooseDest.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), DestActivity.class);
-                    startActivityForResult(intent, 0);
-                }
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), DestActivity.class);
+                startActivityForResult(intent, 0);
+            }
         });
     }
 
     /**
-     * findBuilding() takes input for latitude and longitude, ultimately coming from
-     * Dest activity, places a marker on the specified building based on lat and long,
-     * and also focuses camera on said building.
+     * setCurrentBuilding() takes a building model and sets it as the current destination of the map
      *
-     * @param newLat is the physical latitude of the building
-     * @param newLong is the physical longitude of the building
-     * @param locName is the name of the building
+     * @param currentBuilding is the building model to represent the destination
      */
-    public static void findBuilding (double newLat, double newLong, String locName) {
-        LatLng building = new LatLng(newLat, newLong);
-        mMap.addMarker(new MarkerOptions().position(building).title(locName));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(building));
+    public static void setCurrentBuilding(Building currentBuilding) {
+        currentDestination = currentBuilding;
     }
 
     @Override
@@ -110,5 +128,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String permission = "android.permission.ACCESS_FINE_LOCATION";
         int res = getApplicationContext().checkCallingOrSelfPermission(permission);
         return (res == PackageManager.PERMISSION_GRANTED);
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        btnBlueprint.setVisibility(View.VISIBLE);
+        return false;
     }
 }

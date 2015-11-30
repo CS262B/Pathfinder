@@ -1,15 +1,12 @@
-package edu.calvin.cs262.prototype;
+package edu.calvin.cs262.prototype.activities;
 
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
 import android.widget.EditText;
-
-import java.lang.String;
 
 //import org.apache.http.HttpEntity;
 //import org.apache.http.HttpResponse;
@@ -19,9 +16,7 @@ import java.lang.String;
 //import org.apache.http.protocol.BasicHttpContext;
 //import org.apache.http.protocol.HttpContext;
 
-import java.io.InputStream;
-import java.io.IOException;
-
+import edu.calvin.cs262.prototype.R;
 import edu.calvin.cs262.prototype.client.PathfinderClient;
 import edu.calvin.cs262.prototype.models.Building;
 
@@ -61,18 +56,20 @@ public class DestActivity extends Activity{
         btnGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), MapsActivity.class);
                 try {
                     // Get instance of client
                     PathfinderClient client = PathfinderClient.getInstance();
                     // Find the entered building
                     Building desiredBuilding = client.getBuilding(buildingCodeField.getText().toString());
                     // Add a marker to the map at the building's location
-                    MapsActivity.findBuilding(desiredBuilding.getLattitude(), desiredBuilding.getLongitude(), desiredBuilding.getName());
-                    System.out.println("Marker placed!");
+                    MapsActivity.setCurrentBuilding(desiredBuilding);
                 } catch (NullPointerException n){
                     System.out.println(n.getMessage());
                 }
+
+                // Create an intent to start MapActivity
+                Intent intent = new Intent(v.getContext(), MapsActivity.class);
+                // Start activity
                 startActivityForResult(intent, 0);
             }
         });
