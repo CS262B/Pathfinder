@@ -63,6 +63,8 @@ public class DestActivity extends Activity{
                     Building desiredBuilding = client.getBuilding(buildingCodeField.getText().toString());
                     // Add a marker to the map at the building's location
                     MapsActivity.setCurrentBuilding(desiredBuilding);
+                    MapsActivity ma = new MapsActivity();
+                    ma.directionsToBuilding(desiredBuilding.getLattitude(), desiredBuilding.getLongitude());
                 } catch (NullPointerException n){
                     System.out.println(n.getMessage());
                 }
@@ -76,15 +78,6 @@ public class DestActivity extends Activity{
 
     }
 
-
-    //  Not sure if this is necessary
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //some intent action for map activity goes here...
-        if (resultCode == MapsActivity.RESULT_OK) {
-
-        }
-    }
 
 //    Setting up my call to the web service
 //    private static String ADD STUFF HERE
