@@ -3,6 +3,7 @@ package edu.calvin.cs262.prototype.activities;
 
 
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -16,12 +17,18 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
 
+import org.w3c.dom.Document;
+
+import java.util.ArrayList;
+
+import edu.calvin.cs262.prototype.GMapV2Direction;
 import edu.calvin.cs262.prototype.R;
 import edu.calvin.cs262.prototype.activities.DestActivity;
 import edu.calvin.cs262.prototype.models.Building;
@@ -42,6 +49,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static GoogleMap mMap;
     private static Building currentDestination;
     private Button btnBlueprint;
+    private LatLng building;
+    private LatLng currentLoc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +112,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 startActivityForResult(intent, 0);
             }
         });
+    }
+
+    /**
+     * directionsToBuilding takes a latitude and longitude of the specified
+     * building in dest activity, creates a new direction object, then sends
+     * request to Google API, and receives a response in order to draw a Polyline
+     * between the user and the building, utilizing paths when possible.
+     *
+     * @param newLat is latitude of the building
+     * @param newLong is longitude of the building
+     */
+    public void directionsToBuilding(double newLat, double newLong){
+        building = new LatLng (newLat, newLong);
+        //creating the directions - currently hardcoded
+        currentLoc = new LatLng(42.932415, -85.586720);
+        GMapV2Direction md = new GMapV2Direction();
+
+        Document doc = md.getDocument(currentLoc, building, GMapV2Direction.MODE_WALKING);
+        //receives an ArrayList of LatLngs between which to draw the Polyline
+        ArrayList<LatLng> directionPoint = md.getDirection(doc);
+        PolylineOptions rectLine = new PolylineOptions().width(4).color(Color.GREEN);
+
+        for(int i = 0 ; i < directionPoint.size() ; i++) {
+            rectLine.add(directionPoint.get(i));
+        }
+
+        mMap.addPolyline(rectLine);
+
     }
 
     /**
