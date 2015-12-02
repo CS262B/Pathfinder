@@ -61,14 +61,14 @@ public class DestActivity extends Activity{
                     PathfinderClient client = PathfinderClient.getInstance();
                     // Find the entered building
                     Building desiredBuilding = client.getBuilding(buildingCodeField.getText().toString());
+                    MapsActivity ma = new MapsActivity();
+                    //drawing directions to current building
+                    ma.directionsToBuilding(desiredBuilding.getLattitude(), desiredBuilding.getLongitude());
                     // Add a marker to the map at the building's location
                     MapsActivity.setCurrentBuilding(desiredBuilding);
-                    MapsActivity ma = new MapsActivity();
-                    ma.directionsToBuilding(desiredBuilding.getLattitude(), desiredBuilding.getLongitude());
                 } catch (NullPointerException n){
                     System.out.println(n.getMessage());
                 }
-
                 // Create an intent to start MapActivity
                 Intent intent = new Intent(v.getContext(), MapsActivity.class);
                 // Start activity
