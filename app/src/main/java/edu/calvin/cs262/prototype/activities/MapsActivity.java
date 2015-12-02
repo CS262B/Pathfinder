@@ -83,6 +83,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             LatLng currentMarker = new LatLng(currentDestination.getLattitude(), currentDestination.getLongitude());
             mMap.addMarker(new MarkerOptions().position(currentMarker).title(currentDestination.getName()));
             BlueprintActivity.currentImageURL = currentDestination.myURL();
+            directionsToBuilding();
             mMap.moveCamera(CameraUpdateFactory.newLatLng(currentMarker));
         }
         //if (getCallingActivity().equals("DestActivity")) {
@@ -118,30 +119,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * request to Google API, and receives a response in order to draw a Polyline
      * between the user and the building, utilizing paths when possible.
      *
-     * @param newLat is latitude of the building
-     * @param newLong is longitude of the building
      */
-    public void directionsToBuilding(double newLat, double newLong){
-        //erase any existing polyLines or markers
-        mMap.clear();
-        LatLng destBuilding = new LatLng (newLat, newLong);
+    public void directionsToBuilding(){
+        LatLng destBuilding = new LatLng (currentDestination.getLattitude(), currentDestination.getLongitude());
         //creating the directions - currently hardcoded
-        mMap.setMyLocationEnabled(true);
-        Location current = mMap.getMyLocation();
-        LatLng currentLoc = new LatLng (current.getLatitude(), current.getLongitude());
-        GMapV2Direction md = new GMapV2Direction();
-        //makes a request to Google API for XML listing Lat and Lang points
-        Document doc = md.getDocument(currentLoc, destBuilding, GMapV2Direction.MODE_WALKING);
-        //receives an ArrayList of LatLngs between which to draw the Polyline
-        ArrayList<LatLng> directionPoint = md.getDirection(doc);
-        PolylineOptions rectLine = new PolylineOptions().width(6).color(Color.GREEN);
-
-        for (int i = 0; i < directionPoint.size(); i++) {
-            rectLine.add(directionPoint.get(i));
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        Location current = mMap.getMyLocation();
+        if(current!= null) {
+            LatLng currentLoc = new LatLng(current.getLatitude(), current.getLongitude());
+            GMapV2Direction md = new GMapV2Direction();
+            //makes a request to Google API for XML listing Lat and Lang points
+            Document doc = md.getDocument(currentLoc, destBuilding, GMapV2Direction.MODE_WALKING);
+            //receives an ArrayList of LatLngs between which to draw the Polyline
+            ArrayList<LatLng> directionPoint = md.getDirection(doc);
+            PolylineOptions rectLine = new PolylineOptions().width(6).color(Color.GREEN);
 
-        mMap.addPolyline(rectLine);
+            for (int i = 0; i < directionPoint.size(); i++) {
+                rectLine.add(directionPoint.get(i));
+            }
 
+            mMap.addPolyline(rectLine);
+        }
     }
 
     /**
