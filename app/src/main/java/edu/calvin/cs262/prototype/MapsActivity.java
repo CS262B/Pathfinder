@@ -65,15 +65,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
         }
-        //if (getCallingActivity().equals("DestActivity")) {
-            //MarkerOptions mOps = new MarkerOptions();
-            //mMap.addMarker(mOps.position(new LatLng(42.931003, -85.588937)));
-        //}
+        /*if (getCallingActivity().equals("DestActivity")) {
+            MarkerOptions mOps = new MarkerOptions();
+            mMap.addMarker(mOps.position(new LatLng(42.931003, -85.588937)));
+        }*/
         //back to destination activity to choose destination
         Button btnChooseDest = (Button) findViewById(R.id.chooseDestBttn);
         btnChooseDest.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(), DestActivity.class);
                     startActivityForResult(intent, 0);
                 }
