@@ -58,6 +58,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         mMap = mapFragment.getMap();
+        mMap.clear();
         mMap.setMyLocationEnabled(true);
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         Criteria criteria = new Criteria();
@@ -83,7 +84,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             LatLng currentMarker = new LatLng(currentDestination.getLattitude(), currentDestination.getLongitude());
             mMap.addMarker(new MarkerOptions().position(currentMarker).title(currentDestination.getName()));
             BlueprintActivity.currentImageURL = currentDestination.myURL();
-            directionsToBuilding();
             mMap.moveCamera(CameraUpdateFactory.newLatLng(currentMarker));
         }
         //if (getCallingActivity().equals("DestActivity")) {
@@ -97,6 +97,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         btnBlueprint.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                directionsToBuilding();
                 Intent intent = new Intent(v.getContext(), BlueprintActivity.class);
                 startActivityForResult(intent, 0);
             }
@@ -157,8 +158,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        LatLng calvin = new LatLng(42.932426, -85.587151);
+        //mMap = googleMap;
+        //LatLng calvin = new LatLng(42.932426, -85.587151);
     }
 
     /* checkLocationPermission determines if the app has been granted permission to access
