@@ -49,8 +49,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static GoogleMap mMap;
     private static Building currentDestination;
     private Button btnBlueprint;
-    private LatLng building;
-    private LatLng currentLoc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,17 +122,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * @param newLong is longitude of the building
      */
     public void directionsToBuilding(double newLat, double newLong){
-        building = new LatLng (newLat, newLong);
+        //erase any existing polyLines or markers
+        mMap.clear();
+        LatLng destBuilding = new LatLng (newLat, newLong);
         //creating the directions - currently hardcoded
-        currentLoc = new LatLng(42.932415, -85.586720);
+        mMap.setMyLocationEnabled(true);
+        Location current = mMap.getMyLocation();
+        LatLng currentLoc = new LatLng (current.getLatitude(), current.getLongitude());
         GMapV2Direction md = new GMapV2Direction();
-
-        Document doc = md.getDocument(currentLoc, building, GMapV2Direction.MODE_WALKING);
+        //makes a request to Google API for XML listing Lat and Lang points
+        Document doc = md.getDocument(currentLoc, destBuilding, GMapV2Direction.MODE_WALKING);
         //receives an ArrayList of LatLngs between which to draw the Polyline
         ArrayList<LatLng> directionPoint = md.getDirection(doc);
-        PolylineOptions rectLine = new PolylineOptions().width(4).color(Color.GREEN);
+        PolylineOptions rectLine = new PolylineOptions().width(6).color(Color.GREEN);
 
-        for(int i = 0 ; i < directionPoint.size() ; i++) {
+        for (int i = 0; i < directionPoint.size(); i++) {
             rectLine.add(directionPoint.get(i));
         }
 
