@@ -75,9 +75,13 @@ public class PathfinderClient {
      * @param floorNum
      * @return Floor model object
      */
-    public Floor getFloor(String buildingName, int floorNum) throws NullPointerException{
+    public Floor getFloor(String buildingName, int floorNum){
         // TODO: Replace return statement of getFloorByBuilding with actual get method from server
-        return demoFloors.get(buildingName)[floorNum];
+        try {
+            return demoFloors.get(buildingName)[floorNum];
+        } catch (Exception e){
+            return null;
+        }
     }
 
     /**

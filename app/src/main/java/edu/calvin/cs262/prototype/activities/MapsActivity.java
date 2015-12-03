@@ -146,14 +146,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    /**
-     * setCurrentBuilding() takes a building model and sets it as the current destination of the map
-     *
-     * @param currentBuilding is the building model to represent the destination
-     */
-    public static void setCurrentBuilding(Building currentBuilding) {
-        currentDestination = currentBuilding;
-    }
+
+
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -177,4 +172,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         btnBlueprint.setVisibility(View.VISIBLE);
         return false;
     }
+
+    // Getters and setters
+    public static Building getCurrentDestination() {
+        return currentDestination;
+    }
+    /**
+     * setCurrentBuilding() takes a building model and sets it as the current destination of the map
+     *
+     * @param currentBuilding is the building model to represent the destination
+     */
+    public static void setCurrentBuilding(Building currentBuilding) {
+        currentDestination = currentBuilding;
+    }
+
 }

@@ -22,11 +22,13 @@ import java.net.URL;
 import java.util.HashMap;
 
 import edu.calvin.cs262.prototype.R;
+import edu.calvin.cs262.prototype.client.PathfinderClient;
+import edu.calvin.cs262.prototype.models.Floor;
 
 public class BlueprintActivity extends Activity {
 
     private String currentImageURL;
-    private HashMap<Integer, String> imageURLs;
+    private String[] imageURLs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +40,33 @@ public class BlueprintActivity extends Activity {
 
     }
 
-    private HashMap<Integer, String> getImageURLs() {
-        HashMap<Integer, String> hashMap = new HashMap<Integer, String>();
-        hashMap.put(0, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-0.gif");
-        hashMap.put(1, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-1.gif");
-        hashMap.put(2, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-2.gif");
-        hashMap.put(3, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-3.gif");
-        hashMap.put(4, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-4.gif");
-        hashMap.put(5, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-5.gif");
-        return hashMap;
+    private String[] getImageURLs() {
+        PathfinderClient client = PathfinderClient.getInstance();
+        //HashMap<Integer, String> hashMap = new HashMap<Integer, String>();
+        String[] stringArray = new String[6];
+        RadioButton[] radioButtons = {(RadioButton) findViewById(R.id.floor0bttn),
+                (RadioButton) findViewById(R.id.floor1bttn),
+                (RadioButton) findViewById(R.id.floor2bttn),
+                (RadioButton) findViewById(R.id.floor3bttn),
+                (RadioButton) findViewById(R.id.floor4bttn),
+                (RadioButton) findViewById(R.id.floor5bttn)
+        };
+        for(int i = 0; i < 6; i++){
+            Floor floor = client.getFloor(MapsActivity.getCurrentDestination().getName(), i);
+            if(floor == null){
+                stringArray[i] = "";
+                radioButtons[i].setVisibility(View.INVISIBLE);
+            } else {
+                stringArray[i] = floor.getURL();
+            }
+        }
+        //hashMap.put(0, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-0.gif");
+        //hashMap.put(1, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-1.gif");
+        //hashMap.put(2, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-2.gif");
+        //hashMap.put(3, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-3.gif");
+        //hashMap.put(4, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-4.gif");
+        //hashMap.put(5, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-5.gif");
+        return stringArray;
     }
 
     public void onRadioButtonClicked(View view) {
@@ -57,32 +77,32 @@ public class BlueprintActivity extends Activity {
         switch(view.getId()) {
             case R.id.floor0bttn:
                 if (checked) {
-                    currentImageURL = imageURLs.get(0);
+                    currentImageURL = imageURLs[0];
                 }
                     break;
             case R.id.floor1bttn:
                 if (checked) {
-                    currentImageURL = imageURLs.get(1);
+                    currentImageURL = imageURLs[1];
                 }
                 break;
             case R.id.floor2bttn:
                 if (checked) {
-                    currentImageURL = imageURLs.get(2);
+                    currentImageURL = imageURLs[2];
                 }
                 break;
             case R.id.floor3bttn:
                 if (checked) {
-                    currentImageURL = imageURLs.get(3);
+                    currentImageURL = imageURLs[3];
                 }
                 break;
             case R.id.floor4bttn:
                 if (checked) {
-                    currentImageURL = imageURLs.get(4);
+                    currentImageURL = imageURLs[4];
                 }
                 break;
             case R.id.floor5bttn:
                 if (checked) {
-                    currentImageURL = imageURLs.get(5);
+                    currentImageURL = imageURLs[5];
                 }
                 break;
         }
