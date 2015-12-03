@@ -63,6 +63,7 @@ public class DestActivity extends Activity{
                     Building desiredBuilding = client.getBuilding(buildingCodeField.getText().toString());
                     // Add a marker to the map at the building's location
                     MapsActivity.setCurrentBuilding(desiredBuilding);
+
                 } catch (NullPointerException n){
                     System.out.println(n.getMessage());
                 }
@@ -70,6 +71,11 @@ public class DestActivity extends Activity{
                 Intent intent = new Intent(v.getContext(), MapsActivity.class);
                 // Start activity
                 startActivityForResult(intent, 0);
+                // Chart path from static context
+                //MapsActivity.directionsToBuilding();
+                // Something very strange is going on here
+                System.out.println("Activity Started!");
+
             }
         });
 

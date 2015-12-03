@@ -37,6 +37,7 @@ public class BlueprintActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blueprint);
         imageURLs = getImageURLs();
+        currentImageURL = imageURLs[1];
         resetImage();
         Button mapButton = (Button) findViewById(R.id.mapBttn);
         mapButton.setOnClickListener(new View.OnClickListener() {
