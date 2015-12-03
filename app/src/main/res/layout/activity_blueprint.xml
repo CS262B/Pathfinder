@@ -26,37 +26,57 @@
             android:adjustViewBounds="false"
             android:layout_gravity="top" />
 
-        <GridLayout
+        <RadioGroup
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="117dp"
             android:rowCount="2"
-            android:columnCount="3">
+            android:columnCount="3"
+            android:orientation="horizontal">
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New RadioButton"
+                android:text="0"
+                android:onClick="onRadioButtonClicked"
                 android:id="@+id/floor0bttn" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New RadioButton"
+                android:text="1"
                 android:id="@+id/floor1bttn"
+                android:onClick="onRadioButtonClicked"
                 android:checked="true" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New RadioButton"
+                android:text="2"
+                android:onClick="onRadioButtonClicked"
                 android:id="@+id/floor2bttn" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New RadioButton"
+                android:text="3"
+                android:onClick="onRadioButtonClicked"
                 android:id="@+id/floor3bttn" />
-        </GridLayout>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4"
+                android:onClick="onRadioButtonClicked"
+                android:id="@+id/floor4bttn" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:onClick="onRadioButtonClicked"
+                android:id="@+id/floor5bttn" />
+
+        </RadioGroup>
 
     </GridLayout>
 </RelativeLayout>

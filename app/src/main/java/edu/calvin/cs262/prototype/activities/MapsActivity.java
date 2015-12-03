@@ -83,7 +83,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.setOnMarkerClickListener(this);
             LatLng currentMarker = new LatLng(currentDestination.getLattitude(), currentDestination.getLongitude());
             mMap.addMarker(new MarkerOptions().position(currentMarker).title(currentDestination.getName()));
-            BlueprintActivity.currentImageURL = currentDestination.myURL();
             mMap.moveCamera(CameraUpdateFactory.newLatLng(currentMarker));
         }
         //if (getCallingActivity().equals("DestActivity")) {
