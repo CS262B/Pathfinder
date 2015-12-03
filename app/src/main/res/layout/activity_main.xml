@@ -47,8 +47,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TestImage"
-        android:id="@+id/button2"
+        android:text="Floor Plans"
+        android:id="@+id/floor_button"
         android:onClick="openTest"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"

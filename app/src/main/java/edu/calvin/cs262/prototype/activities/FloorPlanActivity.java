@@ -1,60 +1,45 @@
 package edu.calvin.cs262.prototype.activities;
 
-
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 
 import edu.calvin.cs262.prototype.R;
 
-/**
- * Main Menu Activity
- *
- * Contains buttons for accessing both the
- * Map and Destination Activities
- */
-public class MainActivity extends Activity {
+public class FloorPlanActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_floor_plan);
 
-        //allows network to run on main thread for now. Not ideal.
-        if (android.os.Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
+        //button controller for SB button
+        Button sbBuilding = (Button) findViewById(R.id.sbButton);
 
-        //button controller for Map Activity
-
-
-        //Button for Floor Plan
-        Button btnImageTest = (Button) findViewById(R.id.floor_button);
-        btnImageTest.setOnClickListener(new View.OnClickListener() {
+        sbBuilding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), FloorPlanActivity.class);
+                Intent intent = new Intent(v.getContext(), SB.class);
                 startActivityForResult(intent, 0);
             }
         });
 
-        //button controller for Destination Activity
-        Button btnDest= (Button) findViewById(R.id.dest_button);
-        btnDest.setOnClickListener(new View.OnClickListener() {
+
+        //Button for Floor Plan
+        Button hhBuilding = (Button) findViewById(R.id.hhButton);
+        hhBuilding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), DestActivity.class);
+                Intent intent = new Intent(v.getContext(), HH.class);
                 startActivityForResult(intent, 0);
             }
         });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

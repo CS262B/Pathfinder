@@ -8,4 +8,7 @@
     <string name="destination_button">DESTINATION</string>
     <string name="title_activity_blueprint">Blueprint</string>
     <string name="title_activity_testweb_activity">Testweb_activity</string>
+    <string name="title_activity_floor_plan">FloorPlanActivity</string>
+    <string name="title_activity_sb">SB</string>
+    <string name="title_activity_hh">HH</string>
 </resources>
