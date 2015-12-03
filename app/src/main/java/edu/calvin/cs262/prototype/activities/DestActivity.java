@@ -2,7 +2,9 @@ package edu.calvin.cs262.prototype.activities;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
@@ -36,9 +38,11 @@ public class DestActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dest);
 
+
         // Initialize fields
         final EditText buildingCodeField = (EditText) findViewById(R.id.buildingCodeField);
         EditText roomNumField = (EditText) findViewById(R.id.roomNumField);
+
 
         // Initialize back button
         Button btnMenu = (Button) findViewById(R.id.backmenubutton);
