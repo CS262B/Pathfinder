@@ -1,5 +1,6 @@
 package edu.calvin.cs262.prototype.activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.app.Activity;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
@@ -36,8 +38,14 @@ public class BlueprintActivity extends Activity {
         setContentView(R.layout.activity_blueprint);
         imageURLs = getImageURLs();
         resetImage();
-
-
+        Button mapButton = (Button) findViewById(R.id.mapBttn);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MapsActivity.class);
+                startActivityForResult(intent, 0);
+            }
+        });
     }
 
     private String[] getImageURLs() {
