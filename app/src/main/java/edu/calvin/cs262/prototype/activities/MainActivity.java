@@ -42,6 +42,16 @@ public class MainActivity extends Activity {
             }
         });
 
+        //Button for image test
+        Button btnImageTest = (Button) findViewById(R.id.button2);
+        btnImageTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), BlueprintActivity.class);
+                startActivityForResult(intent, 0);
+            }
+        });
+
         //button controller for Destination Activity
         Button btnDest= (Button) findViewById(R.id.dest_button);
         btnDest.setOnClickListener(new View.OnClickListener() {
