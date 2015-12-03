@@ -17,14 +17,18 @@
         android:rowCount="2"
         android:columnCount="1">
 
-        <ImageView
+        <WebView
             android:layout_width="match_parent"
             android:layout_height="350dp"
-            android:id="@+id/imageView"
+            android:id="@+id/webView"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:adjustViewBounds="false"
-            android:layout_gravity="top" />
+            android:layout_gravity="top"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:longClickable="false"
+            android:nestedScrollingEnabled="true" />
 
         <RadioGroup
             android:layout_width="wrap_content"
@@ -38,7 +42,8 @@
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:onClick="onRadioButtonClicked"
-                android:id="@+id/floor0bttn" />
+                android:id="@+id/floor0bttn"
+                android:nestedScrollingEnabled="false" />
 
             <RadioButton
                 android:layout_width="wrap_content"

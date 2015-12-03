@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
@@ -94,27 +96,42 @@ public class BlueprintActivity extends Activity {
      * Taken from: // http://stackoverflow.com/questions/14867278/android-app-display-image-from-url
      */
     private void resetImage() {
-        ImageView img = (ImageView) findViewById(R.id.imageView);
-        try {
-            URL url = new URL(currentImageURL);
-            HttpGet httpRequest = null;
+        WebView webView = (WebView) findViewById(R.id.webView);
+        webView.setWebViewClient(new MyWebViewClient());
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setInitialScale(75);
+        webView.loadUrl(currentImageURL);
+        //WebView img = (WebView) findViewById(R.id.webView);
+        //try {
+            //URL url = new URL(currentImageURL);
 
-            httpRequest = new HttpGet(url.toURI());
+            //HttpGet httpRequest = null;
 
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpResponse response = (HttpResponse) httpclient
-                    .execute(httpRequest);
+            //httpRequest = new HttpGet(url.toURI());
 
-            HttpEntity entity = response.getEntity();
-            BufferedHttpEntity b_entity = new BufferedHttpEntity(entity);
-            InputStream input = b_entity.getContent();
+            //HttpClient httpclient = new DefaultHttpClient();
+            //HttpResponse response = (HttpResponse) httpclient
+            //        .execute(httpRequest);
 
-            Bitmap bitmap = BitmapFactory.decodeStream(input);
+            //HttpEntity entity = response.getEntity();
+            //BufferedHttpEntity b_entity = new BufferedHttpEntity(entity);
+            //InputStream input = b_entity.getContent();
 
-            img.setImageBitmap(bitmap);
+            //Bitmap bitmap = BitmapFactory.decodeStream(input);
 
-        } catch (Exception ex) {
+            //img.setImageBitmap(bitmap);
 
+
+        //} catch (Exception ex) {
+
+        //}
+    }
+
+    private class MyWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
         }
     }
 
