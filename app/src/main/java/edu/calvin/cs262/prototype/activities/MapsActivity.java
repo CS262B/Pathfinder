@@ -155,9 +155,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        LatLng calvin = new LatLng(42.932426, -85.587151);
+        //mMap = googleMap;
+        //LatLng calvin = new LatLng(42.932426, -85.587151);
     }
+
 
     /* checkLocationPermission determines if the app has been granted permission to access
      * the device's location using GPS
