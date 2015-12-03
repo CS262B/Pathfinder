@@ -17,7 +17,11 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="62dp"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textSize="20dp"
+        android:textColor="#9b1c1c"
+        android:background="#fac42f"
+        android:textStyle="bold" />
 
     <!-- This is the DESTINATION button that bring you to the destination page when clicked-->
     <Button
@@ -27,9 +31,13 @@
         android:onClick="openDest"
         android:id="@+id/dest_button"
         android:width="400dp"
+        android:layout_marginTop="37dp"
+        android:textSize="20dp"
         android:layout_below="@+id/map_button"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="50dp" />
+        android:layout_alignParentStart="true"
+        android:textColor="#9b1c1c"
+        android:background="#fac42f"
+        android:textStyle="bold" />
 
     <!-- This is the welcome sentence located above the buttons-->
     <TextView
@@ -42,6 +50,9 @@
         android:layout_alignEnd="@+id/map_button"
         android:layout_alignParentStart="true"
         android:gravity="center"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="#9b1c1c"
+        android:shadowColor="#030000"
+        android:textSize="23dp" />
 
 </RelativeLayout>

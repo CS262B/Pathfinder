@@ -2,7 +2,9 @@ package edu.calvin.cs262.prototype.activities;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
@@ -36,9 +38,11 @@ public class DestActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dest);
 
+
         // Initialize fields
         final EditText buildingCodeField = (EditText) findViewById(R.id.buildingCodeField);
         EditText roomNumField = (EditText) findViewById(R.id.roomNumField);
+
 
         // Initialize back button
         Button btnMenu = (Button) findViewById(R.id.backmenubutton);
@@ -71,41 +75,10 @@ public class DestActivity extends Activity{
                 Intent intent = new Intent(v.getContext(), MapsActivity.class);
                 // Start activity
                 startActivityForResult(intent, 0);
-                // Chart path from static context
-                //MapsActivity.directionsToBuilding();
-                // Something very strange is going on here
-                System.out.println("Activity Started!");
-
             }
         });
 
     }
 
-
-//    Setting up my call to the web service
-//    private static String ADD STUFF HERE
-
-//    private class LongRunningGetIO extends AsyncTask<Void, Void, String> {
-//
-//        /**
-//         * This method extracts text from the HTTP response entity.
-//         *
-//         * @param entity
-//         * @return
-//         * @throws IllegalStateException
-//         * @throws IOException
-//         */
-//          protected String getASCIIContentFromEntity(entity) throws IllegalStateException, IOException {
-//              InputStream in = entity.getContent();
-//                StringBuffer out = new StringBuffer();
-//                int n = 1;
-//                while (n > 0) {
-//                    byte[] b = new byte[4096];
-//                    n = in.read(b);
-//                    if (n > 0) out.append(new String(b, 0, n));
-//                }
-//    return out.toString();
-//      }
-//    }
 
 }
