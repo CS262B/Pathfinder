@@ -5,10 +5,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 //import org.apache.http.HttpEntity;
 //import org.apache.http.HttpResponse;
@@ -41,7 +43,11 @@ public class DestActivity extends Activity{
 
         // Initialize fields
         final EditText buildingCodeField = (EditText) findViewById(R.id.buildingCodeField);
-        EditText roomNumField = (EditText) findViewById(R.id.roomNumField);
+
+        Spinner dropdown = (Spinner)findViewById(R.id.buildingSpinner);
+        String[] items = new String[]{"DeVries Hall (DH)", "North Hall (NH)", "Science Building (SB)", "Spoelhof Center (SC)"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter);
 
 
         // Initialize back button
