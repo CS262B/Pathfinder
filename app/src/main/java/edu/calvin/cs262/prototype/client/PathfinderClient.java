@@ -26,14 +26,20 @@ public class PathfinderClient {
         demoBuildings = new HashMap<String, Building>();
         demoFloors = new HashMap<String, Floor[]>();
         demoBuildings.put("SB", new Building(0, "SB", 42.931003, -85.588937, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-1.gif"));
-        demoFloors.put("SB", new Floor[]{new Floor(0, 0, 0, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-0.gif"),
-                new Floor(0, 0, 1, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-1.gif"),
-                new Floor(0, 0, 2, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-2.gif"),
-                new Floor(0, 0, 3, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-3.gif")
+        demoFloors.put("SB", new Floor[]{new Floor(0, 0, 0, "https://s3-us-west-2.amazonaws.com/blakedg/SB-0.gif"),
+                new Floor(0, 0, 1, "https://s3-us-west-2.amazonaws.com/blakedg/SB-1.gif"),
+                new Floor(0, 0, 2, "https://s3-us-west-2.amazonaws.com/blakedg/SB-2.gif"),
+                new Floor(0, 0, 3, "https://s3-us-west-2.amazonaws.com/blakedg/SB-3.gif"),
+                new Floor(0, 0, 3, "https://s3-us-west-2.amazonaws.com/blakedg/SB-4.gif")
         });
         demoBuildings.put("NH", new Building(1, "NH", 42.931739, -85.588872, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-1.gif"));
         demoBuildings.put("DH", new Building(2, "DH", 42.931010, -85.588801, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-1.gif"));
         demoBuildings.put("SC", new Building(2, "SC", 42.930323, -85.589324, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-1.gif"));
+        demoFloors.put("SC", new Floor[]{
+                new Floor(0, 0, 1, "https://s3-us-west-2.amazonaws.com/blakedg/SC-1.gif"),
+                new Floor(0, 0, 2, "https://s3-us-west-2.amazonaws.com/blakedg/SC-2.gif"),
+                new Floor(0, 0, 3, "https://s3-us-west-2.amazonaws.com/blakedg/SC-3.gif")
+        });
     }
 
     public static PathfinderClient getInstance(){
@@ -75,9 +81,13 @@ public class PathfinderClient {
      * @param floorNum
      * @return Floor model object
      */
-    public Floor getFloor(String buildingName, int floorNum) throws NullPointerException{
+    public Floor getFloor(String buildingName, int floorNum){
         // TODO: Replace return statement of getFloorByBuilding with actual get method from server
-        return demoFloors.get(buildingName)[floorNum];
+        try {
+            return demoFloors.get(buildingName)[floorNum];
+        } catch (Exception e){
+            return null;
+        }
     }
 
     /**

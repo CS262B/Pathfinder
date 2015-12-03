@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import edu.calvin.cs262.prototype.GMapV2Direction;
 import edu.calvin.cs262.prototype.R;
 import edu.calvin.cs262.prototype.activities.DestActivity;
+import edu.calvin.cs262.prototype.client.PathfinderClient;
 import edu.calvin.cs262.prototype.models.Building;
 
 /**
@@ -58,37 +59,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         mMap = mapFragment.getMap();
+        mMap.clear();
         mMap.setMyLocationEnabled(true);
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         String provider = locationManager.getBestProvider(criteria, true);
-        if (checkLocationPermission()) {
-            Location location = locationManager.getLastKnownLocation(provider);
-
-            if (location != null) {
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                        new LatLng(location.getLatitude(), location.getLongitude()), 13));
-
-                CameraPosition cameraPosition = new CameraPosition.Builder()
-                        .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
-                        .zoom(17)                   // Sets the zoom
-                        .bearing(0)                // Sets the orientation of the camera
-                        .tilt(40)                   // Sets the tilt of the camera
-                        .build();                   // Creates a CameraPosition from the builder
-                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-            }
-        }
-        if(currentDestination != null) {
+        LatLng zoomDest = null;
+        if (currentDestination != null) {
             mMap.setOnMarkerClickListener(this);
             LatLng currentMarker = new LatLng(currentDestination.getLattitude(), currentDestination.getLongitude());
+            zoomDest = currentMarker;
             mMap.addMarker(new MarkerOptions().position(currentMarker).title(currentDestination.getName()));
-            BlueprintActivity.currentImageURL = currentDestination.myURL();
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(currentMarker));
+        } else {
+            if (checkLocationPermission()) {
+                Location location = locationManager.getLastKnownLocation(provider);
+                zoomDest = new LatLng(location.getLatitude(), location.getLongitude());
+            }
         }
-        //if (getCallingActivity().equals("DestActivity")) {
-            //MarkerOptions mOps = new MarkerOptions();
-            //mMap.addMarker(mOps.position(new LatLng(42.931003, -85.588937)));
-        //}
+        if (zoomDest != null){
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                    zoomDest, 13));
+
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(zoomDest)      // Sets the center of the map to location user
+                .zoom(17)                   // Sets the zoom
+                .bearing(0)                // Sets the orientation of the camera
+                .tilt(40)                   // Sets the tilt of the camera
+                .build();                   // Creates a CameraPosition from the builder
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+    }
 
         // Blueprint view button
         btnBlueprint = (Button) findViewById(R.id.blueprintBttn);
@@ -96,8 +95,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         btnBlueprint.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                directionsToBuilding();
                 Intent intent = new Intent(v.getContext(), BlueprintActivity.class);
                 startActivityForResult(intent, 0);
+
             }
         });
 
@@ -110,6 +111,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 startActivityForResult(intent, 0);
             }
         });
+
     }
 
     /**
@@ -118,40 +120,45 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * request to Google API, and receives a response in order to draw a Polyline
      * between the user and the building, utilizing paths when possible.
      *
-     * @param newLat is latitude of the building
-     * @param newLong is longitude of the building
      */
-    public void directionsToBuilding(double newLat, double newLong){
-        //erase any existing polyLines or markers
-        mMap.clear();
-        LatLng destBuilding = new LatLng (newLat, newLong);
-        //creating the directions - currently hardcoded
-        mMap.setMyLocationEnabled(true);
-        Location current = mMap.getMyLocation();
-        LatLng currentLoc = new LatLng (current.getLatitude(), current.getLongitude());
-        GMapV2Direction md = new GMapV2Direction();
-        //makes a request to Google API for XML listing Lat and Lang points
-        Document doc = md.getDocument(currentLoc, destBuilding, GMapV2Direction.MODE_WALKING);
-        //receives an ArrayList of LatLngs between which to draw the Polyline
-        ArrayList<LatLng> directionPoint = md.getDirection(doc);
-        PolylineOptions rectLine = new PolylineOptions().width(6).color(Color.GREEN);
+    public static void directionsToBuilding(){
+        if(currentDestination != null) {
+            LatLng destBuilding = new LatLng(currentDestination.getLattitude(), currentDestination.getLongitude());
+            //creating the directions - currently hardcoded
+            try {
+                if (mMap != null) {
+                    Location current = mMap.getMyLocation();
+                    if (current != null) {
+                        LatLng currentLoc = new LatLng(current.getLatitude(), current.getLongitude());
+                        GMapV2Direction md = new GMapV2Direction();
+                        //makes a request to Google API for XML listing Lat and Lang points
+                        Document doc = md.getDocument(currentLoc, destBuilding, GMapV2Direction.MODE_WALKING);
+                        //receives an ArrayList of LatLngs between which to draw the Polyline
+                        ArrayList<LatLng> directionPoint = md.getDirection(doc);
+                        PolylineOptions rectLine = new PolylineOptions().width(6).color(Color.GREEN);
 
-        for (int i = 0; i < directionPoint.size(); i++) {
-            rectLine.add(directionPoint.get(i));
+                        for (int i = 0; i < directionPoint.size(); i++) {
+                            rectLine.add(directionPoint.get(i));
+                        }
+
+                        mMap.addPolyline(rectLine);
+                    } else {
+                        System.out.println("Cannot chart path: Current location not found.");
+                    }
+                } else {
+                    System.out.println("Cannot chart path: Map not initialized.");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Cannot chart path: Current destination is null.");
         }
-
-        mMap.addPolyline(rectLine);
-
     }
 
-    /**
-     * setCurrentBuilding() takes a building model and sets it as the current destination of the map
-     *
-     * @param currentBuilding is the building model to represent the destination
-     */
-    public static void setCurrentBuilding(Building currentBuilding) {
-        currentDestination = currentBuilding;
-    }
+
+
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -174,6 +181,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public boolean onMarkerClick(Marker marker) {
         btnBlueprint.setVisibility(View.VISIBLE);
+        directionsToBuilding();
         return false;
     }
+
+    // Getters and setters
+    public static Building getCurrentDestination() {
+        return currentDestination;
+    }
+    /**
+     * setCurrentBuilding() takes a building model and sets it as the current destination of the map
+     *
+     * @param currentBuilding is the building model to represent the destination
+     */
+    public static void setCurrentBuilding(Building currentBuilding) {
+        currentDestination = currentBuilding;
+    }
+
 }
