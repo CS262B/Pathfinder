@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center"
-        android:text="See Blueprint"
+        android:text="See Floorplan"
         android:visibility="invisible"
         android:id="@+id/blueprintBttn"
         android:padding="10dp"
