@@ -39,8 +39,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.DestActivity"
-                  android:windowSoftInputMode="stateVisible"></activity>
+        <activity android:name=".activities.DestActivity"></activity>
         <activity
             android:name=".activities.MapsActivity"
             android:launchMode="singleTask"></activity>
