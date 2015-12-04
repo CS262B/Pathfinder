@@ -6,4 +6,5 @@
     <string name="action_search">SEARCH</string>
     <string name="map_button">MAP</string>
     <string name="destination_button">DESTINATION</string>
+    <string name="title_activity_blueprint">Blueprint</string>
 </resources>

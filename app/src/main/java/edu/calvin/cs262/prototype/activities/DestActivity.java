@@ -1,21 +1,12 @@
-package edu.calvin.cs262.prototype;
+package edu.calvin.cs262.prototype.activities;
 
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
 import android.widget.EditText;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.HttpContext;
 
 import java.lang.String;
 
@@ -27,9 +18,7 @@ import java.lang.String;
 //import org.apache.http.protocol.BasicHttpContext;
 //import org.apache.http.protocol.HttpContext;
 
-import java.io.InputStream;
-import java.io.IOException;
-
+import edu.calvin.cs262.prototype.R;
 import edu.calvin.cs262.prototype.client.PathfinderClient;
 import edu.calvin.cs262.prototype.models.Building;
 
@@ -69,33 +58,28 @@ public class DestActivity extends Activity{
         btnGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), MapsActivity.class);
                 try {
                     // Get instance of client
                     PathfinderClient client = PathfinderClient.getInstance();
                     // Find the entered building
                     Building desiredBuilding = client.getBuilding(buildingCodeField.getText().toString());
+                    MapsActivity ma = new MapsActivity();
+                    //drawing directions to current building
+                    ma.directionsToBuilding(desiredBuilding.getLattitude(), desiredBuilding.getLongitude());
                     // Add a marker to the map at the building's location
-                    MapsActivity.findBuilding(desiredBuilding.getLattitude(), desiredBuilding.getLongitude(), desiredBuilding.getName());
-                    System.out.println("Marker placed!");
+                    MapsActivity.setCurrentBuilding(desiredBuilding);
                 } catch (NullPointerException n){
                     System.out.println(n.getMessage());
                 }
+                // Create an intent to start MapActivity
+                Intent intent = new Intent(v.getContext(), MapsActivity.class);
+                // Start activity
                 startActivityForResult(intent, 0);
             }
         });
 
     }
 
-
-    //  Not sure if this is necessary
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //some intent action for map activity goes here...
-        if (resultCode == MapsActivity.RESULT_OK) {
-
-        }
-    }
 
     //Setting up my call to the web service
     private static String PEOPLE_URI = "http://10.0.2.2:9998/pathfinder/";

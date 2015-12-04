@@ -1,15 +1,17 @@
-package edu.calvin.cs262.prototype;
+package edu.calvin.cs262.prototype.activities;
 
 
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Button;
+
+import edu.calvin.cs262.prototype.R;
 
 /**
  * Main Menu Activity
@@ -19,11 +21,16 @@ import android.widget.Button;
  */
 public class MainActivity extends Activity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //allows network to run on main thread for now. Not ideal.
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
         //button controller for Map Activity
         Button btnMap= (Button) findViewById(R.id.map_button);
