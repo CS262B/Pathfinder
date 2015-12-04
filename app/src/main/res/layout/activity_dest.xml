@@ -31,39 +31,17 @@
         android:layout_gravity="center_horizontal" />
 
     <!-- -->
-    <EditText
-        android:layout_width="98dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/buildingCodeField"
-        android:text="SB"
-        android:selectAllOnFocus="true"
-        android:editable="true"
-        android:layout_gravity="center_horizontal"
-        android:textSize="25dp"
-        android:textIsSelectable="true"
-        android:textAlignment="center"
-        android:enabled="true"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:clickable="false"
-        android:inputType="textCapCharacters"
-        android:visibility="visible" />
 
     <!-- "Enter room number" label to show where to enter the room number-->
 
     <!-- Area where room number is displayed-->
-    <GridLayout
-        android:layout_width="96dp"
+
+    <Spinner
+        android:layout_width="247dp"
         android:layout_height="wrap_content"
-        android:rowCount="1"
-        android:columnCount="13"
-        android:id="@+id/gridLayout"
-        android:orientation="horizontal">
-
-        <!-- -->
-
-        <!-- "GO" button that will bring you to the map and area you are wanting to go.-->
-    </GridLayout>
+        android:id="@+id/buildingSpinner"
+        android:spinnerMode="dropdown"
+        android:layout_gravity="center_horizontal" />
 
     <Button
         android:layout_width="wrap_content"
@@ -74,12 +52,5 @@
         android:layout_column="2"
         android:textSize="25dp"
         android:text="GO" />
-
-    <Spinner
-        android:layout_width="259dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/buildingSpinner"
-        android:layout_gravity="center_horizontal"
-        android:spinnerMode="dropdown" />
 
 </LinearLayout>

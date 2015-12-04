@@ -25,17 +25,17 @@ public class PathfinderClient {
     private PathfinderClient(){
         demoBuildings = new HashMap<String, Building>();
         demoFloors = new HashMap<String, Floor[]>();
-        demoBuildings.put("SB", new Building(0, "SB", 42.931003, -85.588937, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-1.gif"));
-        demoFloors.put("SB", new Floor[]{new Floor(0, 0, 0, "https://s3-us-west-2.amazonaws.com/blakedg/SB-0.gif"),
+        demoBuildings.put("Science Building", new Building(0, "Science Building", 42.931003, -85.588937, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-1.gif"));
+        demoFloors.put("Science Building", new Floor[]{new Floor(0, 0, 0, "https://s3-us-west-2.amazonaws.com/blakedg/SB-0.gif"),
                 new Floor(0, 0, 1, "https://s3-us-west-2.amazonaws.com/blakedg/SB-1.gif"),
                 new Floor(0, 0, 2, "https://s3-us-west-2.amazonaws.com/blakedg/SB-2.gif"),
                 new Floor(0, 0, 3, "https://s3-us-west-2.amazonaws.com/blakedg/SB-3.gif"),
                 new Floor(0, 0, 3, "https://s3-us-west-2.amazonaws.com/blakedg/SB-4.gif")
         });
-        demoBuildings.put("NH", new Building(1, "NH", 42.931739, -85.588872, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-1.gif"));
-        demoBuildings.put("DH", new Building(2, "DH", 42.931010, -85.588801, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-1.gif"));
-        demoBuildings.put("SC", new Building(2, "SC", 42.930323, -85.589324, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-1.gif"));
-        demoFloors.put("SC", new Floor[]{
+        demoBuildings.put("North Hall", new Building(1, "North Hall", 42.931739, -85.588872, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-1.gif"));
+        demoBuildings.put("DeVries Hall", new Building(2, "DeVries Hall", 42.931010, -85.588801, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-1.gif"));
+        demoBuildings.put("Spoelhof Center", new Building(2, "Spoelhof Center", 42.930323, -85.589324, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-1.gif"));
+        demoFloors.put("Spoelhof Center", new Floor[]{
                 new Floor(0, 0, 1, "https://s3-us-west-2.amazonaws.com/blakedg/SC-1.gif"),
                 new Floor(0, 0, 2, "https://s3-us-west-2.amazonaws.com/blakedg/SC-2.gif"),
                 new Floor(0, 0, 3, "https://s3-us-west-2.amazonaws.com/blakedg/SC-3.gif")
