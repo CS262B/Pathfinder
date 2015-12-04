@@ -40,11 +40,9 @@ public class DestActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dest);
 
-
         // Initialize fields
-        final EditText buildingCodeField = (EditText) findViewById(R.id.buildingCodeField);
-
-        Spinner dropdown = (Spinner)findViewById(R.id.buildingSpinner);
+        final Spinner dropdown = (Spinner)findViewById(R.id.buildingSpinner);
+        //enter values into dropdown menu
         String[] items = new String[]{"DeVries Hall (DH)", "North Hall (NH)", "Science Building (SB)", "Spoelhof Center (SC)"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
@@ -70,7 +68,8 @@ public class DestActivity extends Activity{
                     // Get instance of client
                     PathfinderClient client = PathfinderClient.getInstance();
                     // Find the entered building
-                    Building desiredBuilding = client.getBuilding(buildingCodeField.getText().toString());
+                    String drdownContents = dropdown.getSelectedItem().toString();
+                    Building desiredBuilding = client.getBuilding(drdownContents.substring(0, drdownContents.length() - 5));
                     // Add a marker to the map at the building's location
                     MapsActivity.setCurrentBuilding(desiredBuilding);
 
