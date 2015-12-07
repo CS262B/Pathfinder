@@ -1,5 +1,17 @@
 package edu.calvin.cs262.prototype.client;
 
+import android.os.AsyncTask;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Enumeration;
@@ -20,6 +32,8 @@ public class PathfinderClient {
     private static PathfinderClient instance;
     private Map<String, Building> demoBuildings;
     private Map<String, Floor[]> demoFloors;
+    private static String BUILDING_URI = "http://153.106.75.120:9998/pathfinder/building";
+    private static String buildingResults = "";
 
 
     private PathfinderClient(){
@@ -49,25 +63,22 @@ public class PathfinderClient {
      * @throws NullPointerException Throws Null Pointer exception if no object is found
      * @return Building model object
      */
-    public Building getBuilding(String name) throws NullPointerException{
+    public Building getBuilding(String name) throws NullPointerException {
+        BUILDING_URI += "?name=" + name;
+        new LongRunningGetIO().execute();
         // Placeholder method looks up the building in a dictionary
-        Building building = demoBuildings.get(name);
-        if(building == null){
-            throw new NullPointerException("No buidling with given name");
-        }
+        Building building;
+        try {
+            building = new Building(buildingResults);
+        } catch (Exception e) {
+            building = demoBuildings.get(name);
+            if (building == null) {
+                throw new NullPointerException("No buidling with given name");
+            }
+
+    }
         return building;
     }
-
-    /**
-     * getBuilding() method retrieves a given building from the server.
-     * @param id
-     * @return Building model object
-     */
-    public Building getBuilding(int id){
-        // Placeholder method stub returns the science building
-        return new Building(id, "Science Building", 42.931003, -85.588937, "picture.gif");
-    }
-
 
     /**
      * getFloor() method retrieves a given building floor from the server.
@@ -91,5 +102,59 @@ public class PathfinderClient {
         return new Room(0, 1, 100, 100, roomNum);
     }
 
+    private class LongRunningGetIO extends AsyncTask<Void, Void, String> {
 
+        /**
+         * This method extracts text from the HTTP response entity.
+         *
+         * @param entity
+         * @return
+         * @throws IllegalStateException
+         * @throws IOException
+         */
+        protected String getASCIIContentFromEntity(HttpEntity entity) throws IllegalStateException, IOException {
+            InputStream in = entity.getContent();
+            StringBuffer out = new StringBuffer();
+            int n = 1;
+            while (n > 0) {
+                byte[] b = new byte[4096];
+                n = in.read(b);
+                if (n > 0) out.append(new String(b, 0, n));
+            }
+            return out.toString();
+        }
+
+        /**
+         * This method issues the HTTP GET request.
+         *
+         * @param params
+         * @return
+         */
+        @Override
+        protected String doInBackground(Void... params) {
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpContext localContext = new BasicHttpContext();
+            HttpGet httpGet = new HttpGet(BUILDING_URI);
+            String text = null;
+            try {
+                HttpResponse response = httpClient.execute(httpGet, localContext);
+                HttpEntity entity = response.getEntity();
+                text = getASCIIContentFromEntity(entity);
+            } catch (Exception e) {
+                return e.getLocalizedMessage();
+            }
+            return text;
+        }
+
+        /**
+         * The method takes the results of the request, when they arrive, and updates the interface.
+         *
+         * @param results
+         */
+        protected void onPostExecute(String results) {
+            if (results != null) {
+                buildingResults = results;
+            }
+        }
+    }
 }
