@@ -2,8 +2,6 @@ package edu.calvin.cs262.prototype.models;
 
 /**
  * The Room class models a row of the Room table in the Pathfinder database.
- *
- * Created by Derek Dik (drd26) on 11/23/2015.
  */
 public class Room {
 

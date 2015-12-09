@@ -2,8 +2,6 @@ package edu.calvin.cs262.prototype.models;
 
 /**
  * The Floor class models a row of the Floor table in the Pathfinder database.
- *
- * Created by Derek Dik (drd26) on 11/23/2015.
  */
 public class Floor {
     private int myID;
@@ -11,6 +9,13 @@ public class Floor {
     private int myFloorNum;
     private String myURL;
 
+    /**
+     *
+     * @param myID the ID number assigned in database
+     * @param myBuildingID the ID number relating the floor to its building
+     * @param myFloorNum the level of the floor in the building
+     * @param myURL URL of the floor's floorplan image
+     */
     public Floor(int myID, int myBuildingID, int myFloorNum, String myURL) {
         this.myID = myID;
         this.myBuildingID = myBuildingID;

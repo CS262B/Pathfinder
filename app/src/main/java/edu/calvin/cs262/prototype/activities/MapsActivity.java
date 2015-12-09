@@ -1,6 +1,16 @@
 package edu.calvin.cs262.prototype.activities;
 
-
+/**
+ * MapsActivity models an Android activity to display Google Maps in order to view your
+ * location at Calvin.
+ *
+ * Displays interactive map using Google Maps API.
+ * Initially centers on user location, and takes
+ * input from Destination Activity in order to
+ * highlight a given building based on its location.
+ * Also will display indoor floor plan for each academic
+ * building.
+ */
 
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -34,17 +44,7 @@ import edu.calvin.cs262.prototype.activities.DestActivity;
 import edu.calvin.cs262.prototype.client.PathfinderClient;
 import edu.calvin.cs262.prototype.models.Building;
 
-/**
- * MapsActivity models an Android activity to display Google Maps in order to view your
- * location at Calvin.
- *
- * Displays interactive map using Google Maps API.
- * Initially centers on user location, and takes
- * input from Destination Activity in order to
- * highlight a given building based on its location.
- * Also will display indoor floor plan for each academic
- * building.
- */
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private static GoogleMap mMap;
@@ -59,6 +59,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         mMap = mapFragment.getMap();
+        //removes any existing markers or lines
         mMap.clear();
         mMap.setMyLocationEnabled(true);
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -162,8 +163,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        //mMap = googleMap;
-        //LatLng calvin = new LatLng(42.932426, -85.587151);
+        //this class is necessary, but has no other function
     }
 
 
