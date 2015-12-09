@@ -2,14 +2,20 @@ package edu.calvin.cs262.prototype.models;
 
 /**
  * The Building class models a row of the Building table in the database.
- *
- * Created by Derek Dik (drd26) on 11/23/2015.
  */
 public class Building {
     private int myID;
     private String myName, myURL;
     private double myLat, myLong;
 
+    /**
+     *
+     * @param id the ID assinged in the database
+     * @param name the name of the building itself
+     * @param lattitude latitude of building's coords
+     * @param longitude longitude of building's coords
+     * @param URL
+     */
     public Building(int id, String name, double lattitude, double longitude, String URL){
         myID = id;
         myName = name;

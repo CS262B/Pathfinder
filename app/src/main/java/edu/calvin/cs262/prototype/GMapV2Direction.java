@@ -1,7 +1,12 @@
 package edu.calvin.cs262.prototype;
 
 /**
- * Created by Jon on 11/30/2015.
+ * GMapV2Direction
+ *
+ * Class containing necessary methods for generating directions
+ * on Google Maps API paths. Uses HTTP requests and receives XML
+ * document providing coordinates through which the path will be
+ * drawn.
  */
 import java.io.InputStream;
 import java.util.ArrayList;

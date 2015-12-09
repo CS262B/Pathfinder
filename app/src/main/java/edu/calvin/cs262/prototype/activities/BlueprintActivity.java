@@ -1,5 +1,13 @@
 package edu.calvin.cs262.prototype.activities;
 
+/**
+ * BlueprintActivity
+ *
+ * Utilizes a web view to retrieve and display images of the floorplans
+ * that exist on an external server. Includes the use of Radio buttons
+ * to alternate between the available floors.
+ */
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -49,6 +57,12 @@ public class BlueprintActivity extends Activity {
         });
     }
 
+    /**
+     * getImageURLs utilizes radio buttons, showing only the number of floors
+     * that exist for a given building.
+     *
+     * @return the URLs for the images of the floorplans to the given building
+     */
     private String[] getImageURLs() {
         PathfinderClient client = PathfinderClient.getInstance();
         //HashMap<Integer, String> hashMap = new HashMap<Integer, String>();
