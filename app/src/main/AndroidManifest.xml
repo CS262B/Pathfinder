@@ -46,6 +46,12 @@
         <activity
             android:name=".activities.BlueprintActivity"
             android:label="@string/title_activity_blueprint"></activity>
+        <activity
+            android:name=".activities.FloorPlanActivity"></activity>
+        <activity
+            android:name=".activities.HH"></activity>
+        <activity
+            android:name=".activities.SB"></activity>
     </application>
 
 </manifest>
