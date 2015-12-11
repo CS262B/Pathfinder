@@ -2,6 +2,7 @@ package edu.calvin.cs262.prototype.activities;
 
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
@@ -12,13 +13,17 @@ import android.content.Intent;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-//import org.apache.http.HttpEntity;
-//import org.apache.http.HttpResponse;
-//import org.apache.http.client.HttpClient;
-//import org.apache.http.client.methods.HttpGet;
-//import org.apache.http.impl.client.DefaultHttpClient;
-//import org.apache.http.protocol.BasicHttpContext;
-//import org.apache.http.protocol.HttpContext;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.String;
 
 import edu.calvin.cs262.prototype.R;
 import edu.calvin.cs262.prototype.client.PathfinderClient;
