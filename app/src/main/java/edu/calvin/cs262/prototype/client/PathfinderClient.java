@@ -72,11 +72,11 @@ public class PathfinderClient {
     public Building getBuilding(String name) throws NullPointerException {
         BUILDING_URI += "?name=" + name;
         new LongRunningGetIO().execute();
-        // Placeholder method looks up the building in a dictionary
         Building building;
         try {
             building = new Building(buildingResults);
         } catch (Exception e) {
+            // Placeholder method looks up the building in a dictionary
             building = demoBuildings.get(name);
             if (building == null) {
                 throw new NullPointerException("No buidling with given name");
