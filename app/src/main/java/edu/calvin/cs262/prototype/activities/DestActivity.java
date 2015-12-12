@@ -8,6 +8,7 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.view.View;
@@ -43,16 +44,34 @@ import edu.calvin.cs262.prototype.models.Building;
  */
 public class DestActivity extends Activity{
 
+    private static Building currentDestination;
+    private Spinner dropdown;
+    private HashMap<String, Building> buildingHashMap;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dest);
 
         // Initialize fields
-        final Spinner dropdown = (Spinner)findViewById(R.id.buildingSpinner);
+        dropdown = (Spinner)findViewById(R.id.buildingSpinner);
+        try {
+            dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    setCurrentDestination();
+                }
 
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                    // Do nothing?
+                }
+            });
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        }
         // Create a dictionary to store Buildings models by name
-        final HashMap<String, Building> buildingHashMap = new HashMap<String, Building>();
+        buildingHashMap = new HashMap<String, Building>();
 
         // Grab an instance of the client
         PathfinderClient client = PathfinderClient.getInstance();
@@ -93,20 +112,10 @@ public class DestActivity extends Activity{
         btnGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    // Get instance of client
-                    PathfinderClient client = PathfinderClient.getInstance();
-                    // Find the entered building
-                    String drdownContents = dropdown.getSelectedItem().toString();
-                    Building desiredBuilding = buildingHashMap.get(drdownContents);
-                    // Add a marker to the map at the building's location
-                    MapsActivity.setCurrentBuilding(desiredBuilding);
-
-                } catch (NullPointerException n){
-                    System.out.println(n.getMessage());
-                }
                 // Create an intent to start MapActivity
                 Intent intent = new Intent(v.getContext(), MapsActivity.class);
+                // Switch the marker on
+                MapsActivity.markerSwitch = true;
                 // Start activity
                 startActivityForResult(intent, 0);
             }
@@ -114,5 +123,14 @@ public class DestActivity extends Activity{
 
     }
 
+    private void setCurrentDestination() {
+        String drdownContents = dropdown.getSelectedItem().toString();
+        Building desiredBuilding = buildingHashMap.get(drdownContents);
+        currentDestination = desiredBuilding;
+    }
 
+
+    public static Building getSelectedBuiding() {
+        return currentDestination;
+    }
 }
