@@ -42,7 +42,7 @@ import edu.calvin.cs262.prototype.models.Building;
  * retrieve building coordinates from database, which are
  * used in Map Activity.
  */
-public class DestActivity extends Activity{
+public class DestActivity extends Activity {
 
     private static Building currentDestination;
     private Spinner dropdown;
@@ -54,7 +54,7 @@ public class DestActivity extends Activity{
         setContentView(R.layout.activity_dest);
 
         // Initialize fields
-        dropdown = (Spinner)findViewById(R.id.buildingSpinner);
+        dropdown = (Spinner) findViewById(R.id.buildingSpinner);
         try {
             dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -67,7 +67,7 @@ public class DestActivity extends Activity{
                     // Do nothing?
                 }
             });
-        } catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         // Create a dictionary to store Buildings models by name
@@ -82,7 +82,7 @@ public class DestActivity extends Activity{
         // length as the array of buildings.
         String[] items = new String[buildings.length];
         // For each building from the client...
-        for(int i = 0; i < buildings.length; i++){
+        for (int i = 0; i < buildings.length; i++) {
             // Store the building in a temporary variable
             Building thisBuilding = buildings[i];
             // Add the building to the Dictionary of Building models
@@ -119,6 +119,18 @@ public class DestActivity extends Activity{
                 // Start activity
                 startActivityForResult(intent, 0);
             }
+        });
+
+        Button btnFloor = (Button) findViewById(R.id.floorBtn);
+        btnFloor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create an intent to start Blueprint Activity
+                Intent intent = new Intent(v.getContext(), BlueprintActivity.class);
+                // Start activity
+                startActivityForResult(intent, 0);
+            }
+
         });
 
     }
