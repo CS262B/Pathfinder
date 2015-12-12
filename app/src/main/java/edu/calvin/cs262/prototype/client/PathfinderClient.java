@@ -1,6 +1,8 @@
 package edu.calvin.cs262.prototype.client;
 
 import android.os.AsyncTask;
+import android.os.Build;
+import android.text.style.BulletSpan;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -13,6 +15,7 @@ import org.apache.http.protocol.HttpContext;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -36,7 +39,7 @@ public class PathfinderClient {
     private static String buildingResults = "";
 
 
-    private PathfinderClient(){
+    private PathfinderClient() {
         demoBuildings = new HashMap<String, Building>();
         demoFloors = new HashMap<String, Floor[]>();
         demoBuildings.put("Science Building", new Building(0, "Science Building", 42.931003, -85.588937, "https://raw.githubusercontent.com/CS262B/Pathfinder/master/materials/Floor%20Plans/SB-1.gif"));
@@ -56,8 +59,8 @@ public class PathfinderClient {
         });
     }
 
-    public static PathfinderClient getInstance(){
-        if(instance == null){
+    public static PathfinderClient getInstance() {
+        if (instance == null) {
             instance = new PathfinderClient();
         }
         return instance;
@@ -65,9 +68,10 @@ public class PathfinderClient {
 
     /**
      * getBuilding() method retrieves a given building from the server.
+     *
      * @param name
-     * @throws NullPointerException Throws Null Pointer exception if no object is found
      * @return Building model object
+     * @throws NullPointerException Throws Null Pointer exception if no object is found
      */
     public Building getBuilding(String name) throws NullPointerException {
         BUILDING_URI += "?name=" + name;
@@ -82,32 +86,49 @@ public class PathfinderClient {
                 throw new NullPointerException("No buidling with given name");
             }
 
-    }
+        }
         return building;
     }
 
     /**
+     * getAllBuildings() method retrieves a given building from the server.
+     *
+     * @return Array of Building models
+     * @throws NullPointerException Throws Null Pointer exception if no object is found
+     */
+    public Building[] getAllBuildings() throws NullPointerException {
+        Collection<Building> buildingsCollection = demoBuildings.values();
+        Building[] buildings = (Building[]) buildingsCollection.toArray(new Building[0]);
+        if (buildings == null) {
+            throw new NullPointerException("No buidling with given name");
+        }
+        return buildings;
+    }
+
+    /**
      * getFloor() method retrieves a given building floor from the server.
+     *
      * @param buildingName
      * @param floorNum
      * @return Floor model object
      */
-    public Floor getFloor(String buildingName, int floorNum){
+    public Floor getFloor(String buildingName, int floorNum) {
         // TODO: Replace return statement of getFloorByBuilding with actual get method from server
         try {
             return demoFloors.get(buildingName)[floorNum];
-        } catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
 
     /**
      * getRoom() method retrieves a given room from the server.
+     *
      * @param buildingName Building name or code
-     * @param roomNum Specific room number
+     * @param roomNum      Specific room number
      * @return Room model object
      */
-    public Room getRoom(String buildingName, int roomNum){
+    public Room getRoom(String buildingName, int roomNum) {
         // TODO: Replace with queries to find correct room
         return new Room(0, 1, 100, 100, roomNum);
     }
