@@ -9,28 +9,13 @@ package edu.calvin.cs262.prototype.activities;
  */
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RadioButton;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.entity.BufferedHttpEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-
-import java.io.InputStream;
-import java.net.URL;
-import java.util.HashMap;
-
 import edu.calvin.cs262.prototype.R;
 import edu.calvin.cs262.prototype.client.PathfinderClient;
 import edu.calvin.cs262.prototype.models.Floor;
@@ -93,6 +78,11 @@ public class BlueprintActivity extends Activity {
         return stringArray;
     }
 
+
+    /**
+     * This is the radio button that allows for the switching of floor views.
+     * @param view
+     */
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();

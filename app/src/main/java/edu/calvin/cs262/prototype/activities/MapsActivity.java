@@ -18,7 +18,6 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -28,20 +27,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
-
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
-
 import org.w3c.dom.Document;
-
 import java.util.ArrayList;
-
 import edu.calvin.cs262.prototype.GMapV2Direction;
 import edu.calvin.cs262.prototype.R;
-import edu.calvin.cs262.prototype.activities.DestActivity;
-import edu.calvin.cs262.prototype.client.PathfinderClient;
 import edu.calvin.cs262.prototype.models.Building;
 
 
@@ -96,7 +89,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
-        // Blueprint view button
+
+        /**
+         * Button that brings up the blueprintActivity
+         * It is hidden initially until the marker is clicked
+         */
         btnBlueprint = (Button) findViewById(R.id.blueprintBttn);
         btnBlueprint.setVisibility(View.INVISIBLE);
         btnBlueprint.setOnClickListener(new View.OnClickListener(){
@@ -109,7 +106,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-        //back to destination activity to choose destination
+
+        /**
+         * Brings the user to the destination page
+         *
+         * @onClick launches destination activity and brings user to destination page
+         */
         Button btnChooseDest = (Button) findViewById(R.id.chooseDestBttn);
         btnChooseDest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +122,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
     }
+
 
     /**
      * directionsToBuilding takes a latitude and longitude of the specified
@@ -138,10 +141,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     if (current != null) {
                         LatLng currentLoc = new LatLng(current.getLatitude(), current.getLongitude());
                         GMapV2Direction md = new GMapV2Direction();
-                        //makes a request to Google API for XML listing Lat and Lang points
-                        Document doc = md.getDocument(currentLoc, destBuilding, GMapV2Direction.MODE_WALKING);
-                        //receives an ArrayList of LatLngs between which to draw the Polyline
-                        ArrayList<LatLng> directionPoint = md.getDirection(doc);
+                        Document doc = md.getDocument(currentLoc, destBuilding, GMapV2Direction.MODE_WALKING);  //makes a request to Google API for XML listing Lat and Lang points
+                        ArrayList<LatLng> directionPoint = md.getDirection(doc);    //receives an ArrayList of LatLngs between which to draw the Polyline
                         PolylineOptions rectLine = new PolylineOptions().width(6).color(Color.GREEN);
 
                         for (int i = 0; i < directionPoint.size(); i++) {
@@ -164,16 +165,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-
-
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         // Do nothing
     }
 
 
-    /* checkLocationPermission determines if the app has been granted permission to access
+    /**
+     *  checkLocationPermission determines if the app has been granted permission to access
      * the device's location using GPS
      *
      * Return: true if permission is granted, false otherwise
@@ -183,6 +182,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         int res = getApplicationContext().checkCallingOrSelfPermission(permission);
         return (res == PackageManager.PERMISSION_GRANTED);
     }
+
 
     @Override
     public boolean onMarkerClick(Marker marker) {

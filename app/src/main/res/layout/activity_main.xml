@@ -16,7 +16,7 @@
         android:id="@+id/map_button"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="62dp"
+        android:layout_marginTop="45dp"
         android:layout_alignParentStart="true"
         android:textSize="20dp"
         android:textColor="#9b1c1c"
@@ -31,13 +31,13 @@
         android:onClick="openDest"
         android:id="@+id/dest_button"
         android:width="400dp"
-        android:layout_marginTop="37dp"
         android:textSize="20dp"
-        android:layout_below="@+id/map_button"
-        android:layout_alignParentStart="true"
         android:textColor="#9b1c1c"
         android:background="#fac42f"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_below="@+id/map_button"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp"/>
 
     <!-- This is the welcome sentence located above the buttons-->
     <TextView
@@ -55,14 +55,33 @@
         android:shadowColor="#030000"
         android:textSize="23dp" />
 
+    //This is the floor plan button that brings you to the floor plan activity.
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Floor Plans"
         android:id="@+id/floor_button"
         android:onClick="openTest"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="84dp" />
+        android:layout_alignParentStart="true"
+        android:background="#ffffff"
+        android:backgroundTint="#ffffff"
+        android:width="40dp"
+        android:shadowColor="#ffffff"
+        android:visibility="invisible" />
+
+    //This is the help document button.
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HELP"
+        android:id="@+id/help"
+        android:textSize="20dp"
+        android:textColor="#9b1c1c"
+        android:background="#fac42f"
+        android:textStyle="bold"
+        android:layout_below="@+id/dest_button"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="30dp"/>
 
 </RelativeLayout>
