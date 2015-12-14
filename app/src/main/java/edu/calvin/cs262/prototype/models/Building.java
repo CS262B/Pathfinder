@@ -5,7 +5,7 @@ package edu.calvin.cs262.prototype.models;
  */
 public class Building {
     private int myID;
-    private String myName, myURL;
+    private String myName;
     private double myLat, myLong;
 
     /**
@@ -19,9 +19,16 @@ public class Building {
     public Building(int id, String name, double lattitude, double longitude, String URL){
         myID = id;
         myName = name;
-        myURL = URL;
         myLat = lattitude;
         myLong = longitude;
+    }
+
+    public Building(String buildingString) {
+        String[] words = buildingString.split(" ");
+        myID = Integer.parseInt(words[0]);
+        myName = words[1];
+        myLat = Float.parseFloat(words[2]);
+        myLong = Float.parseFloat(words[3]);
     }
 
     //Accessors
@@ -30,9 +37,6 @@ public class Building {
     }
     public String getName(){
         return myName;
-    }
-    public String myURL(){
-        return myURL;
     }
     public double getLattitude(){
         return myLat;

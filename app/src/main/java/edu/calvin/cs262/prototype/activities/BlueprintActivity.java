@@ -52,6 +52,7 @@ public class BlueprintActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), MapsActivity.class);
+                MapsActivity.markerSwitch = true;
                 startActivityForResult(intent, 0);
             }
         });
@@ -75,7 +76,7 @@ public class BlueprintActivity extends Activity {
                 (RadioButton) findViewById(R.id.floor5bttn)
         };
         for(int i = 0; i < 6; i++){
-            Floor floor = client.getFloor(MapsActivity.getCurrentDestination().getName(), i);
+            Floor floor = client.getFloor(DestActivity.getSelectedBuiding().getName(), i);
             if(floor == null){
                 stringArray[i] = "";
                 radioButtons[i].setVisibility(View.INVISIBLE);

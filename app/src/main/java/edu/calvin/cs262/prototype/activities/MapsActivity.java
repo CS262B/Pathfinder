@@ -48,8 +48,9 @@ import edu.calvin.cs262.prototype.models.Building;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private static GoogleMap mMap;
-    private static Building currentDestination;
+    private Building currentDestination;
     private Button btnBlueprint;
+    public static Boolean markerSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Criteria criteria = new Criteria();
         String provider = locationManager.getBestProvider(criteria, true);
         LatLng zoomDest = null;
+        if(markerSwitch) {
+            currentDestination = DestActivity.getSelectedBuiding();
+        } else {
+            currentDestination = null;
+        }
         if (currentDestination != null) {
             mMap.setOnMarkerClickListener(this);
             LatLng currentMarker = new LatLng(currentDestination.getLattitude(), currentDestination.getLongitude());
@@ -122,7 +128,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * between the user and the building, utilizing paths when possible.
      *
      */
-    public static void directionsToBuilding(){
+    private void directionsToBuilding(){
         if(currentDestination != null) {
             LatLng destBuilding = new LatLng(currentDestination.getLattitude(), currentDestination.getLongitude());
             //creating the directions - currently hardcoded
@@ -163,7 +169,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        //this class is necessary, but has no other function
+        // Do nothing
     }
 
 
@@ -183,19 +189,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         btnBlueprint.setVisibility(View.VISIBLE);
         directionsToBuilding();
         return false;
-    }
-
-    // Getters and setters
-    public static Building getCurrentDestination() {
-        return currentDestination;
-    }
-    /**
-     * setCurrentBuilding() takes a building model and sets it as the current destination of the map
-     *
-     * @param currentBuilding is the building model to represent the destination
-     */
-    public static void setCurrentBuilding(Building currentBuilding) {
-        currentDestination = currentBuilding;
     }
 
 }

@@ -33,7 +33,15 @@ public class MainActivity extends Activity {
         }
 
         //button controller for Map Activity
-
+        Button btnMap = (Button) findViewById(R.id.map_button);
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MapsActivity.class);
+                MapsActivity.markerSwitch = false;
+                startActivityForResult(intent, 0);
+            }
+        });
 
         //Button for Floor Plan
         Button btnImageTest = (Button) findViewById(R.id.floor_button);
