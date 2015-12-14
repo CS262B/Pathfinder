@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -95,6 +96,23 @@ public class DestActivity extends Activity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
 
+
+        // If the currently selected destination is not null, select it from the spinner
+        if(currentDestination != null){
+            try {
+                int selectionID = 0;
+                for(int i = 0; i < items.length; i++){
+                    if(items[i] == currentDestination.getName()){
+                        selectionID = i;
+                        break;
+                    }
+                }
+                dropdown.setSelection(selectionID);
+            } catch (Exception e){
+                System.err.println("Error: Could not restore last selected destination in dropdown menu.");
+                e.printStackTrace();
+            }
+        }
 
         // Initialize back button
         Button btnMenu = (Button) findViewById(R.id.backmenubutton);
