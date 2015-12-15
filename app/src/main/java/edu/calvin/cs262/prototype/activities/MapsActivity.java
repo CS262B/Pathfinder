@@ -95,7 +95,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
          * It is hidden initially until the marker is clicked
          */
         btnBlueprint = (Button) findViewById(R.id.blueprintBttn);
-        btnBlueprint.setVisibility(View.INVISIBLE);
         btnBlueprint.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
