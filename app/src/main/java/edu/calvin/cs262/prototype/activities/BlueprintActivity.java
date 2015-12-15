@@ -1,12 +1,6 @@
 package edu.calvin.cs262.prototype.activities;
 
-/**
- * BlueprintActivity
- *
- * Utilizes a web view to retrieve and display images of the floorplans
- * that exist on an external server. Includes the use of Radio buttons
- * to alternate between the available floors.
- */
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +13,13 @@ import android.widget.RadioButton;
 import edu.calvin.cs262.prototype.R;
 import edu.calvin.cs262.prototype.client.PathfinderClient;
 import edu.calvin.cs262.prototype.models.Floor;
-
+/**
+ * BlueprintActivity
+ *
+ * Utilizes a web view to retrieve and display images of the floorplans
+ * that exist on an external server. Includes the use of Radio buttons
+ * to alternate between the available floors.
+ */
 public class BlueprintActivity extends Activity {
 
     private String currentImageURL;
