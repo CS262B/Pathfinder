@@ -57,6 +57,12 @@ public class PathfinderClient {
                 new Floor(0, 0, 2, "https://s3-us-west-2.amazonaws.com/blakedg/SC-2.gif"),
                 new Floor(0, 0, 3, "https://s3-us-west-2.amazonaws.com/blakedg/SC-3.gif")
         });
+        demoBuildings.put("DeVos Communication Center", new Building(14, "DeVos Communication Center", 42.929983, -85.583579,""));
+        demoFloors.put("DeVos Communication Center", new Floor[]{
+                new Floor(0, 0, 1, "https://s3-us-west-2.amazonaws.com/blakedg/DC-0.gif"),
+                new Floor(0, 0, 2, "https://s3-us-west-2.amazonaws.com/blakedg/DC-1.gif"),
+                new Floor(0, 0, 3, "https://s3-us-west-2.amazonaws.com/blakedg/DC-2.gif")
+        });
     }
 
     public static PathfinderClient getInstance() {
